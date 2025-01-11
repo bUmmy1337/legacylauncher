@@ -3,7 +3,7 @@
 > Пожалуйста, используйте этот ресурс на свой страх и риск. Мы не несем ответственности за любые проблемы, которые могут возникнуть. Оригинальные установочные файлы лаунчера не были изменены.
 
 > [!CAUTION]
-> Все права на лаунчер полностью принадлежат Legacy Launcher.
+> Все права на лаунчер полностью принадлежат [Legacy Launcher](https://github.com/LegacyLauncher)
 
 NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
 

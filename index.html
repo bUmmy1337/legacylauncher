@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url('https://steamuserimages-a.akamaihd.net/ugc/775122858928869659/9585329EDD8C60B7BF7AE069FFEC5521C78BC4E4/?imw=512&amp;imh=288&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true') no-repeat center center fixed;
+            background: url('https://d2w9rnfcy7mm78.cloudfront.net/20015259/original_0514af997e18aeab5fb271db19f145cb.gif?1674596252?bc=0') no-repeat center center fixed;
             background-size: cover;
             color: #f4f4f4;
             margin: 0;
@@ -19,6 +19,21 @@
             padding: 10px 0;
             text-align: center;
             border-radius: 5px;
+            position: relative; /* Для позиционирования кнопки */
+        }
+        .source-code-button {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            background: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+        .source-code-button:hover {
+            background: #0056b3;
         }
         main {
             margin: 20px 0;
@@ -29,24 +44,22 @@
         }
         a {
             display: inline-block;
-            margin: 10px 0;
+            margin: 10px;
             padding: 10px 20px;
             background: #007bff;
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
+            width: 180px; /* Ширина кнопок */
+            text-align: center;
         }
         a:hover {
             background: #0056b3;
         }
         .button-group {
             display: flex;
-            flex-direction: column;
-            align-items: left;
-        }
-        .button-group a {
-            width: 200px; /* Ширина кнопок */
-            text-align: left;
+            flex-wrap: wrap; /* Позволяет кнопкам переноситься на новую строку */
+            justify-content: center; /* Центрирует кнопки по горизонтали */
         }
     </style>
 </head>
@@ -54,6 +67,7 @@
 
 <header>
     <h1>Неофициальное зеркало Legacy Launcher</h1>
+    <a class="source-code-button" href="https://github.com/bUmmy1337/llaun.ch-unofficial" target="_blank">Исходный код</a>
 </header>
 
 <main>
@@ -61,20 +75,22 @@
     <p>Это неофициальное зеркало для загрузки Legacy Launcher. Здесь вы можете скачать последнюю версию.</p>
     
     <div class="button-group">
-        <a href="https://ru1.llaun.ch/repo/downloads/LegacyLauncher_Installer_legacy.exe" download>Скачать для Windows</a>
-        <a href="https://github.com/bUmmy1337/llaun.ch-unofficial/raw/refs/heads/main/TL_legacy.dmg" download>Скачать для macOS</a>
-        <a href="https://flathub.org/apps/ch.tlaun.TL" download>Скачать для Flathub</a>
-        <a href="https://github.com/bUmmy1337/llaun.ch-unofficial/raw/refs/heads/main/TL_legacy.deb" download>Скачать для Ubuntu</a>
+        <a href="https://ru1.llaun.ch/repo/downloads/LegacyLauncher_Installer_legacy.exe" download>Скачать для Windows (.exe)</a>
+        <a href="https://github.com/bUmmy1337/llaun.ch-unofficial/raw/refs/heads/main/TL_legacy.dmg" download>Скачать для macOS (.dmg)</a>
+        <a href="https://flathub.org/apps/ch.tlaun.TL" download>Скачать через Flathub</a>
+        <a href="https://github.com/bUmmy1337/llaun.ch-unofficial/raw/refs/heads/main/TL_legacy.deb" download>Скачать для Ubuntu (.deb)</a>
         <a href="https://docs.llaun.ch/faq/chromeos" download>Скачать для ChromeOS</a>
+        <a href="https://github.com/bUmmy1337/llaun.ch-unofficial/raw/refs/heads/main/LegacyLauncher_legacy.jar" download>Скачать универсальный установщик (.jar)</a>
+        <a href="https://llaun.ch/repo/downloads/LegacyLauncher_Portable_legacy.zip" download>Портативная версия (.zip)</a>
     </div>
 
     <p>Пожалуйста, используйте этот ресурс на свой страх и риск. Мы не несем ответственности за любые проблемы, которые могут возникнуть. Оригинальные установочные файлы лаунчера не были изменены.</p>
 </main>
 
 <footer>
-        <p style="text-align: center;">Все права на лаунчер полностью принадлежат Legacy Launcher.</p>
+    <p style="text-align: center;">Все права на лаунчер полностью принадлежат Legacy Launcher.</p>
     <p style="text-align: center;">NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</p>
-<p style="text-align: center;">This mirror is in no way affiliated with Mojang Studios, nor should it be considered a project endorsed by Mojang Studios.</p>
+   <p style="text-align: center;">This mirror is in no way affiliated with Mojang Studios, nor should it be considered a project endorsed by Mojang Studios.</p>
     <p style="text-align: center;">If you have any questions, suggestions or complaints, please feel free to contact our mirror administration: contact@circlemc.ru</p>
 </footer>
 

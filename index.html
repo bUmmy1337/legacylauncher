@@ -3,96 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Неофициальное зеркало Legacy Launcher</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: url('https://cdnb.artstation.com/p/assets/images/images/010/170/331/original/damian-gasinski-starslandsape-export.gif?1522944370') no-repeat center center fixed;
-            background-size: cover;
-            color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        header {
-            background: rgba(51, 51, 51, 0.8);
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-            border-radius: 5px;
-            position: relative; /* Для позиционирования кнопки */
-        }
-        .source-code-button {
-            position: absolute;
-            top: 1px;
-            right: 1px;
-            background: #007bff;
-            color: #fff;
-            padding: 5px 10px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 12px;
-        }
-        .source-code-button:hover {
-            background: #0056b3;
-        }
-        main {
-            margin: 20px 0;
-            padding: 20px;
-            background: rgba(34, 34, 34, 0.8);
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-        a {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px 20px;
-            background: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            width: 180px; /* Ширина кнопок */
-            text-align: center;
-        }
-        a:hover {
-            background: #0056b3;
-        }
-        .button-group {
-            display: flex;
-            flex-wrap: wrap; /* Позволяет кнопкам переноситься на новую строку */
-            justify-content: center; /* Центрирует кнопки по горизонтали */
-        }
-    </style>
+    <title>Legacy Launcher Mirror</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap">
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="https://bummy1337.github.io/bUmmy1337/">Автор: bUmmy1337</a></li>
+                <li><a href="https://github.com/bUmmy1337/llaun.ch-unofficial/">Исходный код</a></li>
+                <li><a href="https://github.com/bUmmy1337/llaun.ch-unofficial/releases/download/launcher/LegacyLauncher_Portable_legacy.zip">Портативная версия</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+<section class="hero">
+            <h1>Legacy Launcher Mirror</h1>
+            <p>Неофициальное зеркало Legacy Launcher</p>
+            <div class="grid">
+                <div class="grid-item">
+    <a href="https://github.com/bUmmy1337/llaun.ch-unofficial/releases/download/launcher/LegacyLauncher_Installer_legacy.exe" class="button windows">
+        <img src="assets/windows-icon.png" alt="Windows" width="40" height="40" style="margin-right: 10px;">
+        Скачать для Windows (.exe)
+    </a>
+</div>
+<div class="grid-item">
+    <a href="https://github.com/bUmmy1337/llaun.ch-unofficial/releases/download/launcher/TL_legacy.dmg" class="button macos" style="background-color: #FF69B4;">
+        <img src="assets/macos-icon.png" alt="macOS" width="40" height="40" style="margin-right: 10px;">
+        Скачать для macOS (.dmg)
+    </a>
+</div>
+<div class="grid-item">
+    <a href="https://flathub.org/apps/ch.tlaun.TL" class="button flathub">
+        <img src="assets/flathub-icon.png" alt="Flathub" width="40" height="40" style="margin-right: 10px;">
+        Скачать через Flathub
+    </a>
+</div>
+<div class="grid-item">
+    <a href="https://github.com/bUmmy1337/llaun.ch-unofficial/releases/download/launcher/TL_legacy.deb" class="button ubuntu">
+        <img src="assets/ubuntu-icon.png" alt="Ubuntu" width="40" height="40" style="margin-right: 10px;">
+        Скачать для Ubuntu (.deb)
+    </a>
+</div>
+<div class="grid-item">
+    <a href="https://docs.llaun.ch/faq/chromeos" class="button chromeos">
+        <img src="assets/chromeos-icon.png" alt="ChromeOS" width="40" height="40" style="margin-right: 10px;">
+        Скачать для ChromeOS
+    </a>
+</div>
+<div class="grid-item">
+    <a href="https://github.com/bUmmy1337/llaun.ch-unofficial/releases/download/launcher/LegacyLauncher_legacy.jar" class="button universal">
+        <img src="assets/universal-icon.png" alt="Универсальный" width="40" height="40" style="margin-right: 10px;">
+        Скачать универсальный установщик (.jar)
+    </a>
+</div>
 
-<header>
-    <h1>Неофициальное зеркало Legacy Launcher</h1>
-    <a class="source-code-button" href="https://github.com/bUmmy1337/llaun.ch-unofficial" target="_blank">Исходный код</a>
-</header>
 
-<main>
-    <h2>Добро пожаловать!</h2>
-    <p>Это неофициальное зеркало для загрузки Legacy Launcher. Здесь вы можете скачать последнюю версию.</p>
-    
-    <div class="button-group">
-        <a href="https://github.com/bUmmy1337/llaun.ch-unofficial/releases/download/launcher/LegacyLauncher_Installer_legacy.exe" download>Скачать для Windows (.exe)</a>
-        <a href="https://github.com/bUmmy1337/llaun.ch-unofficial/releases/download/launcher/TL_legacy.dmg" download>Скачать для macOS (.dmg)</a>
-        <a href="https://flathub.org/apps/ch.tlaun.TL" download>Скачать через Flathub</a>
-        <a href="https://github.com/bUmmy1337/llaun.ch-unofficial/releases/download/launcher/TL_legacy.deb" download>Скачать для Ubuntu (.deb)</a>
-        <a href="https://docs.llaun.ch/faq/chromeos" download>Скачать для ChromeOS</a>
-        <a href="https://github.com/bUmmy1337/llaun.ch-unofficial/releases/download/launcher/LegacyLauncher_legacy.jar" download>Скачать универсальный установщик (.jar)</a>
-        <a href="https://github.com/bUmmy1337/llaun.ch-unofficial/releases/download/launcher/LegacyLauncher_Portable_legacy.zip" download>Портативная версия (.zip)</a>
-    </div>
 
-    <p>Пожалуйста, используйте этот ресурс на свой страх и риск. Мы не несем ответственности за любые проблемы, которые могут возникнуть. Оригинальные установочные файлы лаунчера не были изменены.</p>
-</main>
-
-<footer>
+            </div>
+        </section>
+        <section class="about">
+            <h2>О проекте</h2>
+            <p>Это неофициальное зеркало для загрузки Legacy Launcher. Здесь вы можете скачать последнюю версию.</p>
+        </section>
+    </main>
+    <footer>
     <p style="text-align: center;">Все права на лаунчер полностью принадлежат Legacy Launcher.</p>
     <p style="text-align: center;">NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</p>
    <p style="text-align: center;">This mirror is in no way affiliated with Mojang Studios, nor should it be considered a project endorsed by Mojang Studios.</p>
     <p style="text-align: center;">If you have any questions, suggestions or complaints, please feel free to contact our mirror administration: contact@circlemc.ru</p>
-</footer>
-
+    </footer>
 </body>
 </html>

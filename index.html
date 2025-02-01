@@ -40,23 +40,29 @@
             z-index: 1000;
         }
         .your-platform {
-        background: #00ff88;
-        color: #121212;
-        padding: 0.3rem 0.8rem;
-        border-radius: 15px;
-        font-size: 0.8rem;
-        margin-left: 0.5rem;
-        font-weight: bold;
-        display: inline-block;
-        white-space: nowrap; /* Добавлено */
-        vertical-align: middle; /* Добавлено */
-    }
+    background: #00ff88;
+    color: #121212;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    white-space: nowrap;
+    position: absolute;
+    top: -7px;
+    right: 10px;
+    transform: translate(25%, -25%);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1;
+    line-height: 1;
+}
 
     .platform-btn span {
-        display: inline-flex; /* Изменено с text-align: left */
-        align-items: center;
-        gap: 0.5rem;
-    }
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    z-index: 2;
+}
 
         .logo {
             font-size: 1.5rem;
@@ -337,6 +343,8 @@
         align-items: center;
         gap: 1rem;
         transition: transform 0.3s, background 0.3s;
+        position: relative;
+        overflow: visible !important;
     }
 
     .platform-btn:hover {

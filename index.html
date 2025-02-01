@@ -43,17 +43,19 @@
     background: #00ff88;
     color: #121212;
     padding: 0.3rem 0.8rem;
-    border-radius: 15px;
+    border-radius: 12px; /* Совпадает с радиусом кнопок */
     font-size: 0.8rem;
     font-weight: bold;
     white-space: nowrap;
     position: absolute;
-    top: -7px;
-    right: 10px;
-    transform: translate(25%, -25%);
+    top: -10px;
+    right: -10px;
+    width: max-content; /* Фиксированная ширина по содержимому */
+    min-width: 70px; /* Минимальная ширина плашки */
+    text-align: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    z-index: 1;
     line-height: 1;
+    transform: none; /* Убираем лишние трансформации */
 }
 
     .platform-btn span {
@@ -345,6 +347,7 @@
         transition: transform 0.3s, background 0.3s;
         position: relative;
         overflow: visible !important;
+        padding-right: 2rem; /* Добавляем место для плашки */
     }
 
     .platform-btn:hover {
@@ -592,19 +595,19 @@ function toggleAnswer(id) {
 
 
     function markPlatform() {
-        const os = detectOS();
-        const platformButtons = document.querySelectorAll('.platform-btn');
-        
-        platformButtons.forEach(btn => {
-            const supportedOS = btn.getAttribute('data-os') || '';
-            if (supportedOS.includes(os)) {
-                const label = document.createElement('span');
-                label.className = 'your-platform';
-                label.textContent = 'Для вас';
-                btn.querySelector('span').appendChild(label);
-            }
-        });
-    }
+    const os = detectOS();
+    const platformButtons = document.querySelectorAll('.platform-btn');
+    
+    platformButtons.forEach(btn => {
+        const supportedOS = btn.getAttribute('data-os') || '';
+        if (supportedOS.includes(os)) {
+            const label = document.createElement('div'); // Меняем span на div
+            label.className = 'your-platform';
+            label.textContent = 'Для вас';
+            btn.prepend(label); // Вставляем в начало кнопки
+        }
+    });
+}
 
 
     window.addEventListener('DOMContentLoaded', markPlatform);

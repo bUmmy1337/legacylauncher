@@ -44,9 +44,17 @@
         padding: 0.3rem 0.8rem;
         border-radius: 15px;
         font-size: 0.8rem;
-        margin-left: 1rem;
+        margin-left: 0.5rem;
         font-weight: bold;
         display: inline-block;
+        white-space: nowrap; /* Добавлено */
+        vertical-align: middle; /* Добавлено */
+    }
+
+    .platform-btn span {
+        display: inline-flex; /* Изменено с text-align: left */
+        align-items: center;
+        gap: 0.5rem;
     }
 
         .logo {
@@ -70,7 +78,7 @@
             color: #00ff88;
         }
 
-       /* Добавляем эти стили в секцию .hero */
+       /* Добавляем стили в секцию .hero */
     .hero {
         position: relative;
         padding: 4rem 5%;
@@ -280,18 +288,17 @@
             <i class="fas fa-cube"></i>
             <span>Flathub</span>
         </a>
-        <!-- Измененная иконка для универсального установщика -->
-        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_legacy.jar" class="platform-btn">
+        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_legacy.jar" class="platform-btn" data-os="windows" data-os="linux">
             <i class="fab fa-java"></i>
             <span>Универсальный .jar</span>
         </a>
-        <!-- Измененная иконка для портативной версии -->
+
         <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_Portable_legacy.zip" class="platform-btn" data-os="windows">
             <i class="fas fa-file-archive"></i>
             <span>Портативная версия</span>
         </a>
         <!-- Добавить в секцию .download-grid перед портативной версией -->
-<a href="https://adoptium.net/temurin/releases/" class="platform-btn" target="_blank">
+<a href="https://adoptium.net/temurin/releases/" class="platform-btn" data-os="windows" data-os="linux" data-os="macos" target="_blank">
     <i class="fas fa-coffee"></i>
     <span>Java от Adoptium</span>
 </a>
@@ -376,7 +383,7 @@
             <p>Работа без сбоев и зависаний</p>
         </div>
         <div class="feature-card">
-            <i class="fas fa-wrench feature-icon"></i>
+            <i class="fas fa-paint-brush feature-icon"></i>
             <h3>Кастомизируемый</h3>
             <p>Настройте внешний вид лаунчера под свой вкус</p>
         </div>
@@ -534,6 +541,7 @@
             justify-content: center;
         }
     }
+
 </style>
     <footer>
         <p>LegacyMirror не аффилирован с Mojang или Microsoft. Все права принадлежат их законным владельцам.</p>
@@ -563,7 +571,7 @@ function toggleAnswer(id) {
         });
     </script>
 <script>
-    // Определение операционной системы
+
     function detectOS() {
         const userAgent = navigator.userAgent;
         if (userAgent.includes('Windows')) return 'windows';
@@ -573,23 +581,24 @@ function toggleAnswer(id) {
         return 'unknown';
     }
 
-    // Добавление метки "Для вас"
+
     function markPlatform() {
         const os = detectOS();
         const platformButtons = document.querySelectorAll('.platform-btn');
         
         platformButtons.forEach(btn => {
-            if (btn.dataset.os === os) {
+            const supportedOS = btn.getAttribute('data-os') || '';
+            if (supportedOS.includes(os)) {
                 const label = document.createElement('span');
                 label.className = 'your-platform';
                 label.textContent = 'Для вас';
-                btn.appendChild(label);
+                btn.querySelector('span').appendChild(label);
             }
         });
     }
 
-    // Выполнить после загрузки страницы
+
     window.addEventListener('DOMContentLoaded', markPlatform);
-</script>    
+</script> 
 </body>
 </html>

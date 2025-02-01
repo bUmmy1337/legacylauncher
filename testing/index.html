@@ -38,6 +38,16 @@
             top: 0;
             z-index: 1000;
         }
+        .your-platform {
+        background: #00ff88;
+        color: #121212;
+        padding: 0.3rem 0.8rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        margin-left: 1rem;
+        font-weight: bold;
+        display: inline-block;
+    }
 
         .logo {
             font-size: 1.5rem;
@@ -250,23 +260,23 @@
 <section class="download" id="download">
     <h2>Варианты установки</h2>
     <div class="download-grid">
-        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_Installer_legacy.exe" class="platform-btn">
+        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_Installer_legacy.exe" class="platform-btn" data-os="windows">
             <i class="fab fa-windows"></i>
             <span>Windows (.exe)</span>
         </a>
-        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/TL_legacy.dmg" class="platform-btn">
+        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/TL_legacy.dmg" class="platform-btn" data-os="macos">
             <i class="fab fa-apple"></i>
             <span>macOS (.dmg)</span>
         </a>
-        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/TL_legacy.deb" class="platform-btn">
+        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/TL_legacy.deb" class="platform-btn" data-os="linux">
             <i class="fab fa-linux"></i>
             <span>Ubuntu (.deb)</span>
         </a>
-        <a href="https://docs.llaun.ch/faq/chromeos" class="platform-btn">
+        <a href="https://docs.llaun.ch/faq/chromeos" class="platform-btn" data-os="chromeos">
             <i class="fab fa-chrome"></i>
             <span>ChromeOS</span>
         </a>
-        <a href="https://flathub.org/apps/ch.tlaun.TL" class="platform-btn">
+        <a href="https://flathub.org/apps/ch.tlaun.TL" class="platform-btn" data-os="linux">
             <i class="fas fa-cube"></i>
             <span>Flathub</span>
         </a>
@@ -276,7 +286,7 @@
             <span>Универсальный .jar</span>
         </a>
         <!-- Измененная иконка для портативной версии -->
-        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_Portable_legacy.zip" class="platform-btn">
+        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_Portable_legacy.zip" class="platform-btn" data-os="windows">
             <i class="fas fa-file-archive"></i>
             <span>Портативная версия</span>
         </a>
@@ -552,5 +562,34 @@ function toggleAnswer(id) {
             });
         });
     </script>
+<script>
+    // Определение операционной системы
+    function detectOS() {
+        const userAgent = navigator.userAgent;
+        if (userAgent.includes('Windows')) return 'windows';
+        if (userAgent.includes('Mac OS')) return 'macos';
+        if (userAgent.includes('Linux')) return 'linux';
+        if (userAgent.includes('CrOS')) return 'chromeos';
+        return 'unknown';
+    }
+
+    // Добавление метки "Для вас"
+    function markPlatform() {
+        const os = detectOS();
+        const platformButtons = document.querySelectorAll('.platform-btn');
+        
+        platformButtons.forEach(btn => {
+            if (btn.dataset.os === os) {
+                const label = document.createElement('span');
+                label.className = 'your-platform';
+                label.textContent = 'Для вас';
+                btn.appendChild(label);
+            }
+        });
+    }
+
+    // Выполнить после загрузки страницы
+    window.addEventListener('DOMContentLoaded', markPlatform);
+</script>    
 </body>
 </html>

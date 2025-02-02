@@ -67,14 +67,32 @@
 }
     
     .unsupported-message {
-        background: #ff444433;
-        border: 2px solid #ff4444;
-        padding: 2rem;
-        border-radius: 10px;
-        text-align: center;
-        margin: 2rem 0;
-        color: #ff4444;
-    }
+    background: #ff444433;
+    border: 2px solid #ff4444;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    margin: 2rem 0;
+    color: #ff4444;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.unsupported-message i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.unsupported-message h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.unsupported-message p {
+    margin: 0;
+    font-size: 1rem;
+}
 
         .logo {
             font-size: 1.5rem;
@@ -628,14 +646,17 @@ function toggleAnswer(id) {
     }
 
     function handleMobile() {
-        
         // Добавить сообщение в секцию загрузок
         const downloadSection = document.getElementById('download');
         if(downloadSection && !document.getElementById('unsupported-msg')) {
             const msg = document.createElement('div');
             msg.id = 'unsupported-msg';
             msg.className = 'unsupported-message';
-            msg.innerHTML = '⚠️ Ваше устройство не поддерживается. Для использования лаунчера требуется компьютер.';
+            msg.innerHTML = `
+                <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                <h3>Ваше устройство не поддерживается</h3>
+                <p>Legacy Launcher и другие лаунчеры для «Minecraft: Java Edition» работают только на компьютерах под управлением Windows, Linux или macOS.</p>
+            `;
             downloadSection.prepend(msg);
         }
     }

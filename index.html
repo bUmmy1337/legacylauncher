@@ -354,17 +354,118 @@
     @media (max-width: 768px) {
         .slide {
             height: 400px;
+.carousel-section {
+        padding: 4rem 5%;
+        background: #1a1a1a;
+        text-align: center;
+    }
+
+    .carousel-section h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .carousel-container {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 15px;
+    }
+
+    .carousel-slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+        min-width: 100%;
+        height: 481px;
+        position: relative;
+    }
+
+    .slide img {
+        width: 800px;
+        height: 481px;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 15px;
+        cursor: pointer;
+        font-size: 24px;
+        border-radius: 5px;
+        transition: 0.3s;
+    }
+
+    .carousel-btn:hover {
+        background: rgba(0, 255, 136, 0.7);
+    }
+
+    .prev {
+        left: 20px;
+    }
+
+    .next {
+        right: 20px;
+    }
+
+    .dots-container {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+    }
+
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .dot.active {
+        background: #00ff88;
+    }
+
+    @media (max-width: 850px) {
+        .carousel-container {
+            max-width: 90%;
         }
-        
-        .carousel-btn {
-            padding: 10px;
-            font-size: 18px;
+
+        .slide {
+            height: calc(481px * 0.9);
+        }
+
+        .slide img {
+            width: 100%;
+            height: calc(481px * 0.9);
         }
     }
 
     @media (max-width: 480px) {
         .slide {
-            height: 300px;
+            height: calc(481px * 0.7);
+        }
+
+        .slide img {
+            height: calc(481px * 0.7);
+        }
+
+        .carousel-btn {
+            padding: 10px;
+            font-size: 18px;
         }
     }
     </style>

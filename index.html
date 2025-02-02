@@ -65,6 +65,16 @@
     position: relative;
     z-index: 2;
 }
+    
+    .unsupported-message {
+        background: #ff444433;
+        border: 2px solid #ff4444;
+        padding: 2rem;
+        border-radius: 10px;
+        text-align: center;
+        margin: 2rem 0;
+        color: #ff4444;
+    }
 
         .logo {
             font-size: 1.5rem;
@@ -612,5 +622,28 @@ function toggleAnswer(id) {
 
     window.addEventListener('DOMContentLoaded', markPlatform);
 </script> 
+<script>
+    function isMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    function handleMobile() {
+        
+        // Добавить сообщение в секцию загрузок
+        const downloadSection = document.getElementById('download');
+        if(downloadSection && !document.getElementById('unsupported-msg')) {
+            const msg = document.createElement('div');
+            msg.id = 'unsupported-msg';
+            msg.className = 'unsupported-message';
+            msg.innerHTML = '⚠️ Ваше устройство не поддерживается. Для использования лаунчера требуется компьютер.';
+            downloadSection.prepend(msg);
+        }
+    }
+
+    // Автоматическая проверка при загрузке
+    if(isMobile()) {
+        handleMobile();
+    }
+</script>
 </body>
 </html>

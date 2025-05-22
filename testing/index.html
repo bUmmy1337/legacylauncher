@@ -1,604 +1,234 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Legacy Launcher Mirror - Легендарный лаунчер Minecraft</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<meta property="og:title" content="Legacy Mirror">
-<meta property="og:description" content="Неофициальное зеркало самого быстрого и безопасного лаунчера.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://bummy1337.github.io/legacylauncher">
-<meta property="og:image" content="https://raw.githubusercontent.com/bUmmy1337/legacylauncher/refs/heads/main/assets/image.png">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-        }
+import React, { useState, useEffect } from 'react';
 
-        body {
-            background: #1a1a1a;
-            color: #ffffff;
-            line-height: 1.6;
-        }
+export default function App() {
+  const [hoveredPlan, setHoveredPlan] = useState(null);
+  const scrollContainerRef = React.useRef(null);
 
-        .navbar {
-            background: #121212;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .your-platform {
-        background: #00ff88;
-        color: #121212;
-        padding: 0.3rem 0.8rem;
-        border-radius: 15px;
-        font-size: 0.8rem;
-        margin-left: 0.5rem;
-        font-weight: bold;
-        display: inline-block;
-        white-space: nowrap; /* Добавлено */
-        vertical-align: middle; /* Добавлено */
+  const plans = [
+    {
+      name: "Комета",
+      ram: "2 ГБ",
+      cpu: "150%",
+      ssd: "20 ГБ",
+      slots: "Неограниченно",
+      price: "$3/мес (240₽)",
+      idealFor: "Идеально для небольших серверов с друзьями!",
+      emoji: "☄️"
+    },
+    {
+      name: "Планета",
+      ram: "3.5 ГБ",
+      cpu: "350%",
+      ssd: "25 ГБ",
+      slots: "Неограниченно",
+      price: "$6/мес (480₽)",
+      idealFor: "Отлично подходит для средних проектов!",
+      emoji: "🪐"
     }
+  ];
 
-    .platform-btn span {
-        display: inline-flex; /* Изменено с text-align: left */
-        align-items: center;
-        gap: 0.5rem;
+  const features = [
+    {
+      title: "Мгновенный запуск",
+      description: "Создайте сервер всего за пару кликов — без задержек и сложных настроек.",
+      icon: <LightningIcon />
+    },
+    {
+      title: "DDOS-защита",
+      description: "Ваш сервер всегда в безопасности благодаря надёжной системе защиты от атак.",
+      icon: <ShieldIcon />
+    },
+    {
+      title: "Автоматические бэкапы",
+      description: "Никогда не потеряете важные данные — резервные копии создаются ежедневно.",
+      icon: <BackupIcon />
+    },
+    {
+      title: "Поддержка 24/7",
+      description: "Наши специалисты всегда готовы помочь — в любое время суток.",
+      icon: <SupportIcon />
     }
+  ];
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #00ff88;
-        }
+  const games = ["Minecraft", "Terraria", "Factorio", "Mindustry", "Rust", "CS:GO", "GTA V", "Roblox"];
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
+  // Автоскролл для строки с играми
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
 
-        .nav-links a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+    let scrollAmount = 0;
+    const speed = 1;
 
-        .nav-links a:hover {
-            color: #00ff88;
-        }
+    const animateScroll = () => {
+      scrollAmount += speed;
+      if (scrollAmount >= container.scrollWidth / 2) {
+        scrollAmount = 0;
+      }
+      container.style.transform = `translateX(-${scrollAmount}px)`;
+      requestAnimationFrame(animateScroll);
+    };
 
-       /* Добавляем стили в секцию .hero */
-    .hero {
-        position: relative;
-        padding: 4rem 5%;
-        text-align: center;
-        overflow: hidden;
-    }
+    const id = requestAnimationFrame(animateScroll);
 
-    .hero::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url('https://raw.githubusercontent.com/bUmmy1337/legacylauncher/refs/heads/main/assets/2oWRE9h.png') center/cover;
-        filter: blur(8px);
-        z-index: -1;
-    }
+    return () => cancelAnimationFrame(id);
+  }, []);
 
-    .hero::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(26, 26, 26, 0.85);
-        z-index: -1;
-    }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .download-btn {
-            background: #00ff88;
-            color: #121212;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: transform 0.3s;
-            display: inline-block;
-            margin-top: 2rem;
-        }
-
-        .download-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .features {
-            padding: 4rem 5%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: #242424;
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: #00ff88;
-            margin-bottom: 1rem;
-        }
-
-.faq {
-    padding: 4rem 5%;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.faq h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-}
-
-.faq-item {
-    background: #242424;
-    margin-bottom: 1rem;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.faq-question {
-    padding: 1.5rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-}
-
-.faq-question span {
-    flex-grow: 1;
-    text-align: left;
-}
-
-.faq-answer {
-    padding: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.0s ease-out;
-    visibility: hidden;
-    opacity: 0;
-}
-
-.faq-answer.active {
-    padding: 0 1.5rem 1.5rem;
-    max-height: 500px; /* Достаточно для большинства ответов */
-    visibility: visible;
-    opacity: 1;
-}
-
-.faq-question i {
-    transition: transform 0.0s;
-    flex-shrink: 0;
-    margin-left: 0.5rem;
-}
-
-.faq-answer p {
-    margin-bottom: 1rem;
-}
-
-.faq-answer p:last-child {
-    margin-bottom: 0;
-}
-
-
-        footer {
-            background: #121212;
-            padding: 3rem 5%;
-            text-align: center;
-            margin-top: 4rem;
-        }
-
-        .social-links {
-            margin-top: 2rem;
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-
-        .social-links a {
-            color: #ffffff;
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-
-        .social-links a:hover {
-            color: #00ff88;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="logo">LegacyMirror</div>
-        <div class="nav-links">
-            <a href="#home">Главная</a>
-            <a href="#download">Скачать</a>
-            <a href="#features">Возможности</a>
-            <a href="#faq">FAQ</a>
+  return (
+    <div className="min-h-screen bg-black text-white font-mono">
+      {/* Scrolling Game List with Auto Scroll */}
+      <div className="overflow-hidden whitespace-nowrap py-4 px-6 border-b border-gray-800 relative">
+        <div
+          ref={scrollContainerRef}
+          className="flex gap-4"
+          style={{ whiteSpace: 'nowrap' }}
+        >
+          {games.map((game, i) => (
+            <span
+              key={i}
+              className="inline-block px-6 py-1 mx-2 border border-orange-500 text-orange-500 text-xl md:text-2xl font-bold tracking-wider"
+            >
+              {game}
+            </span>
+          ))}
+          {/* Duplicate for seamless loop */}
+          {games.map((game, i) => (
+            <span
+              key={`dup-${i}`}
+              className="inline-block px-6 py-1 mx-2 border border-orange-500 text-orange-500 text-xl md:text-2xl font-bold tracking-wider"
+            >
+              {game}
+            </span>
+          ))}
         </div>
-    </nav>
+      </div>
 
-    <section class="hero" id="home">
-        <h1>Legacy Launcher</h1>
-        <p>Стабильный, быстрый и простой</p>
-        <a href="#download" class="download-btn">Скачать сейчас</a>
-    </section>
-<section class="download" id="download">
-    <h2>Варианты установки</h2>
-    <div class="download-grid">
-        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_Installer_legacy.exe" class="platform-btn" data-os="windows">
-            <i class="fab fa-windows"></i>
-            <span>Windows (.exe)</span>
-        </a>
-        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/TL_legacy.dmg" class="platform-btn" data-os="macos">
-            <i class="fab fa-apple"></i>
-            <span>macOS (.dmg)</span>
-        </a>
-        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/TL_legacy.deb" class="platform-btn" data-os="linux">
-            <i class="fab fa-linux"></i>
-            <span>Ubuntu (.deb)</span>
-        </a>
-        <a href="https://docs.llaun.ch/faq/chromeos" class="platform-btn" data-os="chromeos">
-            <i class="fab fa-chrome"></i>
-            <span>ChromeOS</span>
-        </a>
-        <a href="https://flathub.org/apps/ch.tlaun.TL" class="platform-btn" data-os="linux">
-            <i class="fas fa-cube"></i>
-            <span>Flathub</span>
-        </a>
-        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_legacy.jar" class="platform-btn" data-os="windows" data-os="linux">
-            <i class="fab fa-java"></i>
-            <span>Универсальный .jar</span>
-        </a>
+      {/* Hero Section */}
+      <section className="px-6 md:px-12 lg:px-24 pt-16 pb-20">
+        <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
+          <span className="text-orange-500">Venerux</span> — мощный хостинг для серверов Minecraft и не только.
+        </h1>
+        <p className="text-gray-400 max-w-xl">
+          Простой запуск, стабильная работа, круглосуточная поддержка.
+        </p>
+      </section>
 
-        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_Portable_legacy.zip" class="platform-btn" data-os="windows">
-            <i class="fas fa-file-archive"></i>
-            <span>Портативная версия</span>
-        </a>
-        <!-- Добавить в секцию .download-grid перед портативной версией -->
-<a href="https://adoptium.net/temurin/releases/" class="platform-btn" data-os="windows" data-os="linux" data-os="macos" target="_blank">
-    <i class="fas fa-coffee"></i>
-    <span>Java от Adoptium</span>
-</a>
+      {/* Features Section */}
+      <section className="px-6 md:px-12 lg:px-24 mb-20">
+        <h2 className="text-xl md:text-2xl font-bold mb-6 text-orange-500">Преимущества</h2>
+        <div className="space-y-6">
+          {features.map((feature, idx) => (
+            <div
+              key={idx}
+              className="border border-gray-800 p-5 rounded-md hover:border-orange-500 transition-colors duration-300 flex items-start gap-4"
+            >
+              <div className="text-orange-500">{feature.icon}</div>
+              <div>
+                <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
+                <p className="text-gray-400 text-sm">{feature.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Pricing Plans */}
+      <section className="px-6 md:px-12 lg:px-24 mb-20">
+        <h2 className="text-xl md:text-2xl font-bold mb-6 text-orange-500">Тарифы</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          {plans.map((plan, index) => (
+            <div
+              key={index}
+              onMouseEnter={() => setHoveredPlan(index)}
+              onMouseLeave={() => setHoveredPlan(null)}
+              className={`border border-gray-800 rounded-md p-6 transition-all duration-300 ${
+                hoveredPlan === index ? 'bg-gray-900 border-orange-500' : ''
+              }`}
+            >
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-bold">{plan.name}</h3>
+                <span className="text-2xl">{plan.emoji}</span>
+              </div>
+              <ul className="space-y-2 text-sm text-gray-400 mb-4">
+                <li>ОЗУ: <strong className="text-white">{plan.ram}</strong></li>
+                <li>CPU: <strong className="text-white">{plan.cpu}</strong></li>
+                <li>SSD: <strong className="text-white">{plan.ssd}</strong></li>
+                <li>Слоты: <strong className="text-white">{plan.slots}</strong></li>
+                <li>Цена: <strong className="text-orange-500">{plan.price}</strong></li>
+              </ul>
+              <p className="text-xs text-gray-500 italic mb-4">{plan.idealFor}</p>
+              <a
+                href="https://t.me/venerux_bot "
+                className="block text-center text-orange-500 font-medium text-sm uppercase tracking-wide border border-orange-500 py-2 rounded hover:bg-orange-500 hover:text-black transition-colors"
+              >
+                Выбрать тариф
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="px-6 md:px-12 lg:px-24 mb-20">
+        <div className="border border-gray-800 p-8 rounded-md text-center">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">Запусти свой сервер уже сегодня!</h2>
+          <p className="text-gray-400 mb-6">Выбери тариф, оплати через Telegram и получи доступ мгновенно.</p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <a
+              href="https://t.me/venerux_bot "
+              className="py-3 px-6 bg-orange-500 text-black font-bold uppercase tracking-wider border border-orange-500 hover:bg-transparent hover:text-orange-500 transition-colors"
+            >
+              Купить сервер
+            </a>
+            <a
+              href="https://dash.venerux.ru "
+              className="py-3 px-6 bg-transparent border border-gray-600 text-gray-400 font-bold uppercase tracking-wider hover:border-orange-500 hover:text-orange-500 transition-colors"
+            >
+              Панель управления
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="px-6 md:px-12 lg:px-24 pb-12 text-xs text-gray-600">
+        <p>Venerux Hosting Provider &copy; 2025</p>
+        <p className="mt-1">Powered by Pterodactyl®</p>
+      </footer>
     </div>
-    <p class="download-note">Версия лаунчера: 159.10 | Стабильная версия</p>
-</section>
-
-<style>
-    .download {
-        padding: 4rem 5%;
-        text-align: center;
-        background: #1f1f1f;
-    }
-
-    .download h2 {
-        font-size: 2rem;
-        margin-bottom: 2rem;
-    }
-
-    .download-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .platform-btn {
-        background: #2d2d2d;
-        padding: 1.5rem;
-        border-radius: 12px;
-        text-decoration: none;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        transition: transform 0.3s, background 0.3s;
-    }
-
-    .platform-btn:hover {
-        background: #00ff8844;
-        transform: translateY(-3px);
-    }
-
-    .platform-btn i {
-        font-size: 1.8rem;
-        width: 40px;
-        color: #00ff88;
-    }
-
-    .platform-btn span {
-        text-align: left;
-        flex-grow: 1;
-        font-weight: 500;
-    }
-
-    .download-note {
-        margin-top: 2rem;
-        color: #888;
-        font-size: 0.9rem;
-    }
-
-    @media (max-width: 480px) {
-        .download-grid {
-            grid-template-columns: 1fr;
-        }
-        
-        .platform-btn {
-            padding: 1rem;
-        }
-    }
-</style>
-    <section class="features" id="features">
-        <div class="feature-card">
-            <i class="fas fa-feather-alt feature-icon"></i>
-            <h3>Легкий и быстрый</h3>
-            <p>Оптимизированный лаунчер с минимальным потреблением ресурсов</p>
-        </div>
-        <div class="feature-card">
-            <i class="fas fa-dashboard feature-icon"></i>
-            <h3>Стабильный</h3>
-            <p>Работа без сбоев и зависаний</p>
-        </div>
-        <div class="feature-card">
-            <i class="fas fa-paint-brush feature-icon"></i>
-            <h3>Кастомизируемый</h3>
-            <p>Настройте внешний вид лаунчера под свой вкус</p>
-        </div>
-    </section>
-
-    <section class="faq" id="faq">
-    <h2>Частые вопросы</h2>
-    
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleAnswer(1)">
-            <span>Это бесплатно?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer" id="answer1">
-            <p>Да, лаунчер полностью бесплатный. В нём нет и никогда не будет платных функций.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleAnswer(2)">
-            <span>Есть ли вирусы?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer" id="answer2">
-            <p>Legacy Launcher полностью безопасен. Если вы скачаете лаунчер с этой страницы, мы гарантируем то, что он не будет содержать никаких вирусов.</p>
-            <p>Если вы знакомы с разработкой на Java, являетесь специалистом по кибербезопасности, ну или просто хотите поиграться, для вас доступны исходники лаунчера.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleAnswer(3)">
-            <span>Можно ли устанавливать читы?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer" id="answer3">
-            <p>Да, лаунчер позволяет игрокам запускать любые версии игры без ограничений.</p>
-            <p>Мы не рекомендуем пользоваться читами там, где это запрещено.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleAnswer(4)">
-            <span>Можно ли устанавливать моды и сборки?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer" id="answer4">
-            <p>Да, можно! Для вашего удобства в лаунчере можно выбрать версии с Forge и Fabric. Авторы также оставили возможность устанавливать их вручную.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleAnswer(5)">
-            <span>Можно ли менять скины в Legacy Launcher?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer" id="answer5">
-            <p>Да, конечно! Для этого вам и вашим друзьям следует использовать бесплатный аккаунт Ely.by. Его можно добавить в лаунчере в меню аккаунтов.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleAnswer(6)">
-            <span>Есть ли у Legacy Launcher портативная сборка?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer" id="answer6">
-            <p>Да, есть. Можете скачать портативную сборку здесь. Инструкции найдете внутри архива.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleAnswer(7)">
-            <span>У меня не получается запустить игру. Что делать?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer" id="answer7">
-            <p>Обратитесь в бесплатную поддержку по ссылкам ниже.</p>
-        </div>
-    </div>
-</section>
-<!-- Поддержка после секции FAQ и перед футером -->
-<section class="support" id="support">
-    <h2>Поддержка</h2>
-    <div class="support-grid">
-        <a href="https://discord.gg/tl-russkoiazychnyi-filial-177087343511994368" class="support-card discord">
-            <i class="fab fa-discord"></i>
-            <span>Discord сервер</span>
-        </a>
-        <a href="https://vk.com/legacylauncher" class="support-card vk">
-            <i class="fab fa-vk"></i>
-            <span>Сообщество VK</span>
-        </a>
-        <a href="https://t.me/tl_chat_ru/687311" class="support-card telegram">
-    <i class="fab fa-telegram"></i>
-    <span>Telegram чат</span>
-</a>
-    </div>
-</section>
-
-<style>
-    .support {
-        padding: 4rem 5%;
-        text-align: center;
-        background: #1f1f1f;
-    }
-
-    .support h2 {
-        font-size: 2rem;
-        margin-bottom: 2rem;
-    }
-
-    .support-grid {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        flex-wrap: wrap;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .support-card {
-        padding: 2rem 3rem;
-        border-radius: 15px;
-        text-decoration: none;
-        color: white;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        transition: transform 0.3s;
-    }
-
-    .support-card i {
-        font-size: 2rem;
-    }
-
-    .support-card.discord {
-        background: #5865F2;
-    }
-
-    .support-card.vk {
-        background: #0077FF;
-    }
-    
-    .support-card.telegram {
-    background: #0088CC;
-    }
-
-    .support-card:hover {
-        transform: translateY(-5px);
-    }
-
-    @media (max-width: 480px) {
-        .support-card {
-            width: 100%;
-            justify-content: center;
-        }
-    }
-
-</style>
-    <footer>
-        <p>LegacyMirror не аффилирован с Mojang или Microsoft. Все права принадлежат их законным владельцам.</p>
-        <div class="social-links">
-            <a href="https://discord.gg/tl-russkoiazychnyi-filial-177087343511994368"><i class="fab fa-discord"></i></a>
-            <a href="https://github.com/bUmmy1337/legacylauncher/tree/main"><i class="fab fa-github"></i></a>
-            <a href="https://t.me/tl_chat_ru/"><i class="fab fa-telegram"></i></a>
-        </div>
-        <p style="margin-top: 2rem;">© 2025 LegacyMirror. Все права на лаунчер принадлежат Legacy Launcher.</p>
-    </footer>
-<script>
-function toggleAnswer(id) {
-    const answer = document.getElementById(`answer${id}`);
-    const icon = answer.previousElementSibling.querySelector('i');
-    answer.classList.toggle('active');
-    icon.classList.toggle('fa-chevron-up');
+  );
 }
-</script>
-    <script>
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
-<script>
 
-    function detectOS() {
-        const userAgent = navigator.userAgent;
-        if (userAgent.includes('Windows')) return 'windows';
-        if (userAgent.includes('Mac OS')) return 'macos';
-        if (userAgent.includes('Linux')) return 'linux';
-        if (userAgent.includes('CrOS')) return 'chromeos';
-        return 'unknown';
-    }
+// --- SVG Icons ---
+function LightningIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <path d="M13 2L3 14h9l-1 8L21 10h-9l1-8z" />
+    </svg>
+  );
+}
 
+function ShieldIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    </svg>
+  );
+}
 
-    function markPlatform() {
-        const os = detectOS();
-        const platformButtons = document.querySelectorAll('.platform-btn');
-        
-        platformButtons.forEach(btn => {
-            const supportedOS = btn.getAttribute('data-os') || '';
-            if (supportedOS.includes(os)) {
-                const label = document.createElement('span');
-                label.className = 'your-platform';
-                label.textContent = 'Для вас';
-                btn.querySelector('span').appendChild(label);
-            }
-        });
-    }
+function BackupIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  );
+}
 
-
-    window.addEventListener('DOMContentLoaded', markPlatform);
-</script> 
-</body>
-</html>
+function SupportIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+    </svg>
+  );
+}

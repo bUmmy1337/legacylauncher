@@ -1,292 +1,956 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legacy Launcher Mirror - Легендарный лаунчер Minecraft</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<meta property="og:title" content="Legacy Mirror">
-<link rel="icon" type="image/x-icon" href="assets/favicon.png">
-<meta property="og:description" content="Неофициальное зеркало самого быстрого и безопасного лаунчера.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://bummy1337.github.io/legacylauncher">
-<meta property="og:image" content="https://raw.githubusercontent.com/bUmmy1337/legacylauncher/refs/heads/main/assets/image.png">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+    <meta property="og:title" content="Legacy Mirror">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.png">
+    <meta property="og:description" content="Неофициальное зеркало самого быстрого и безопасного лаунчера.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://bummy1337.github.io/legacylauncher">
+    <meta property="og:image" content="https://raw.githubusercontent.com/bUmmy1337/legacylauncher/refs/heads/main/assets/image.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <style>
+        :root {
+            /* Default theme - Vibrant Purple */
+            --primary-color: #8b5cf6;
+            --secondary-color: #6366f1;
+            --dark-color: #7c3aed;
+            --light-color: #8b5cf620;
+            --accent-color: #ec4899;
+            --bg-dark: #0a0a0a;
+            --bg-medium: #111111;
+            --bg-light: #1a1a1a;
+            --card-bg: #141414;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --border-color: #2a2a2a;
+        }
+
+        /* Vibrant Themes */
+        [data-theme="vibrant-pink"] {
+            --primary-color: #ec4899;
+            --secondary-color: #f472b6;
+            --dark-color: #db2777;
+            --light-color: #ec489920;
+        }
+
+        [data-theme="vibrant-orange"] {
+            --primary-color: #f97316;
+            --secondary-color: #fb923c;
+            --dark-color: #ea580c;
+            --light-color: #f9731620;
+        }
+
+        [data-theme="vibrant-yellow"] {
+            --primary-color: #eab308;
+            --secondary-color: #facc15;
+            --dark-color: #ca8a04;
+            --light-color: #eab30820;
+        }
+
+        [data-theme="vibrant-mint"] {
+            --primary-color: #10b981;
+            --secondary-color: #34d399;
+            --dark-color: #059669;
+            --light-color: #10b98120;
+        }
+
+        [data-theme="vibrant-blue"] {
+            --primary-color: #3b82f6;
+            --secondary-color: #60a5fa;
+            --dark-color: #2563eb;
+            --light-color: #3b82f620;
+        }
+
+        [data-theme="vibrant-purple"] {
+            --primary-color: #8b5cf6;
+            --secondary-color: #6366f1;
+            --dark-color: #7c3aed;
+            --light-color: #8b5cf620;
+        }
+
+        /* Pastel Themes */
+        [data-theme="pastel-pink"] {
+            --primary-color: #f9a8d4;
+            --secondary-color: #fbcfe8;
+            --dark-color: #f472b6;
+            --light-color: #f9a8d420;
+        }
+
+        [data-theme="pastel-orange"] {
+            --primary-color: #fed7aa;
+            --secondary-color: #ffedd5;
+            --dark-color: #fdba74;
+            --light-color: #fed7aa20;
+        }
+
+        [data-theme="pastel-yellow"] {
+            --primary-color: #fef3c7;
+            --secondary-color: #fffbeb;
+            --dark-color: #fde68a;
+            --light-color: #fef3c720;
+        }
+
+        [data-theme="pastel-mint"] {
+            --primary-color: #a7f3d0;
+            --secondary-color: #d1fae5;
+            --dark-color: #6ee7b7;
+            --light-color: #a7f3d020;
+        }
+
+        [data-theme="pastel-blue"] {
+            --primary-color: #bfdbfe;
+            --secondary-color: #dbeafe;
+            --dark-color: #93c5fd;
+            --light-color: #bfdbfe20;
+        }
+
+        [data-theme="pastel-purple"] {
+            --primary-color: #ddd6fe;
+            --secondary-color: #e9d5ff;
+            --dark-color: #c4b5fd;
+            --light-color: #ddd6fe20;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
         }
 
         body {
-            background: #1a1a1a;
-            color: #ffffff;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
         }
 
+        /* Плавный анимированный фон */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, var(--light-color) 0%, transparent 70%),
+                linear-gradient(-45deg, transparent 30%, var(--light-color) 100%),
+                linear-gradient(90deg, var(--light-color) 0%, transparent 50%, var(--light-color) 100%);
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: gradientShift 15s ease-in-out infinite;
+            filter: blur(60px);
+        }
+
+        @keyframes gradientShift {
+            0% { 
+                background-position: 0% 50%, 100% 50%, 0% 50%;
+            }
+            25% { 
+                background-position: 100% 0%, 0% 100%, 50% 0%;
+            }
+            50% { 
+                background-position: 100% 100%, 0% 0%, 100% 50%;
+            }
+            75% { 
+                background-position: 0% 100%, 100% 0%, 50% 100%;
+            }
+            100% { 
+                background-position: 0% 50%, 100% 50%, 0% 50%;
+            }
+        }
+
+        /* Theme Switcher */
+        .theme-switcher {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 0.8rem 1.2rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-light);
+            border-color: var(--primary-color);
+        }
+
+        .theme-menu {
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1rem;
+            margin-bottom: 10px;
+            display: none;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .theme-menu.active {
+            display: block;
+        }
+
+        .theme-section {
+            margin-bottom: 1rem;
+        }
+
+        .theme-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .theme-section h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .theme-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        .theme-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-option::before {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            border-radius: 8px;
+            background: var(--bg-dark);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .theme-option:hover::before {
+            opacity: 0.3;
+        }
+
+        .theme-option.active {
+            box-shadow: 0 0 0 2px var(--primary-color);
+        }
+
+        /* Theme color previews */
+        .theme-option[data-theme="vibrant-pink"] { background: linear-gradient(135deg, #ec4899, #f472b6); }
+        .theme-option[data-theme="vibrant-orange"] { background: linear-gradient(135deg, #f97316, #fb923c); }
+        .theme-option[data-theme="vibrant-yellow"] { background: linear-gradient(135deg, #eab308, #facc15); }
+        .theme-option[data-theme="vibrant-mint"] { background: linear-gradient(135deg, #10b981, #34d399); }
+        .theme-option[data-theme="vibrant-blue"] { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+        .theme-option[data-theme="vibrant-purple"] { background: linear-gradient(135deg, #8b5cf6, #6366f1); }
+        
+        .theme-option[data-theme="pastel-pink"] { background: linear-gradient(135deg, #f9a8d4, #fbcfe8); }
+        .theme-option[data-theme="pastel-orange"] { background: linear-gradient(135deg, #fed7aa, #ffedd5); }
+        .theme-option[data-theme="pastel-yellow"] { background: linear-gradient(135deg, #fef3c7, #fffbeb); }
+        .theme-option[data-theme="pastel-mint"] { background: linear-gradient(135deg, #a7f3d0, #d1fae5); }
+        .theme-option[data-theme="pastel-blue"] { background: linear-gradient(135deg, #bfdbfe, #dbeafe); }
+        .theme-option[data-theme="pastel-purple"] { background: linear-gradient(135deg, #ddd6fe, #e9d5ff); }
+
+        /* Navigation */
         .navbar {
-            background: #121212;
-            padding: 1rem 5%;
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
+            position: fixed;
             top: 0;
+            width: 100%;
             z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
         }
-        .your-platform {
-    background: #00ff88;
-    color: #121212;
-    padding: 0.3rem 0.8rem;
-    border-radius: 12px; /* Совпадает с радиусом кнопок */
-    font-size: 0.8rem;
-    font-weight: bold;
-    white-space: nowrap;
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    width: max-content; /* Фиксированная ширина по содержимому */
-    min-width: 70px; /* Минимальная ширина плашки */
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    line-height: 1;
-    transform: none; /* Убираем лишние трансформации */
-}
-
-    .platform-btn span {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    position: relative;
-    z-index: 2;
-}
-    
-    .unsupported-message {
-    background: #ff444433;
-    border: 2px solid #ff4444;
-    padding: 2rem;
-    border-radius: 10px;
-    text-align: center;
-    margin: 2rem 0;
-    color: #ff4444;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.unsupported-message i {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-.unsupported-message h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    font-weight: bold;
-}
-
-.unsupported-message p {
-    margin: 0;
-    font-size: 1rem;
-}
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #00ff88;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
+            align-items: center;
         }
 
         .nav-links a {
-            color: #ffffff;
+            color: var(--text-secondary);
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s;
         }
 
         .nav-links a:hover {
-            color: #00ff88;
+            color: var(--text-primary);
         }
 
-       /* Добавляем стили в секцию .hero */
-    .hero {
-        position: relative;
-        padding: 4rem 5%;
-        text-align: center;
-        overflow: hidden;
-    }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-    .hero::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url('https://raw.githubusercontent.com/bUmmy1337/legacylauncher/refs/heads/main/assets/2oWRE9h.png') center/cover;
-        filter: blur(8px);
-        z-index: -1;
-    }
+        /* Hero Section */
+        .hero {
+            padding: 10rem 5% 6rem;
+            text-align: center;
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .hero::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(26, 26, 26, 0.85);
-        z-index: -1;
-    }
+        .hero-badge {
+            background: var(--light-color);
+            border: 1px solid var(--primary-color);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
 
         .hero h1 {
-            font-size: 2.5rem;
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
             margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: -2px;
         }
 
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 50%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-weight: 400;
+                   }
+
         .download-btn {
-            background: #00ff88;
-            color: #121212;
-            padding: 1rem 2rem;
-            border-radius: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-primary);
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
             text-decoration: none;
-            font-weight: 700;
-            transition: transform 0.3s;
-            display: inline-block;
-            margin-top: 2rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+            position: relative;
+            z-index: 10;
+            border: none;
+            cursor: pointer;
         }
 
         .download-btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(139, 92, 246, 0.4);
+            text-decoration: none;
         }
 
-        .features {
-            padding: 4rem 5%;
+        .download-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* Download Section */
+        .download {
+            padding: 6rem 5%;
+            background: var(--bg-medium);
+            position: relative;
+        }
+
+        .download::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), var(--secondary-color), transparent);
+        }
+
+        .download h2 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+
+        .download-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .platform-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.8rem;
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: visible;
+        }
+
+        .platform-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(135deg, transparent, var(--primary-color), var(--secondary-color));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .platform-btn:hover::before {
+            opacity: 1;
+        }
+
+        .platform-btn:hover {
+            transform: translateY(-4px);
+            background: var(--bg-light);
+            text-decoration: none;
+        }
+
+        .platform-btn i {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            width: 40px;
+        }
+
+        .platform-btn span {
+            font-weight: 500;
+            font-size: 1.05rem;
+        }
+
+        .your-platform {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-primary);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 10px rgba(139, 92, 246, 0.4);
+        }
+
+        .download-note {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .feature-card {
-            background: #242424;
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 3rem 2.5rem;
+            border-radius: 20px;
+            text-align: left;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--light-color) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
         }
 
         .feature-icon {
             font-size: 2.5rem;
-            color: #00ff88;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 6rem 5%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq h2 {
+            font-family: 'Unbounded', sans-serif;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary-color);
+        }
+
+        .faq-question {
+            padding: 1.8rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            font-size: 1.05rem;
+        }
+
+        .faq-question i {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: transform 0.3s;
+        }
+
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-out;
+            opacity: 0;
+        }
+
+        .faq-answer.active {
+            padding: 0 2rem 1.8rem;
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary);
+            line-height: 1.8;
             margin-bottom: 1rem;
         }
 
-.faq {
-    padding: 4rem 5%;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.faq h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-}
-
-.faq-item {
-    background: #242424;
-    margin-bottom: 1rem;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.faq-question {
-    padding: 1.5rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-}
-
-.faq-question span {
-    flex-grow: 1;
-    text-align: left;
-}
-
-.faq-answer {
-    padding: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.0s ease-out;
-    visibility: hidden;
-    opacity: 0;
-}
-
-.faq-answer.active {
-    padding: 0 1.5rem 1.5rem;
-    max-height: 500px; /* Достаточно для большинства ответов */
-    visibility: visible;
-    opacity: 1;
-}
-
-.faq-question i {
-    transition: transform 0.0s;
-    flex-shrink: 0;
-    margin-left: 0.5rem;
-}
-
-.faq-answer p {
-    margin-bottom: 1rem;
-}
-
-.faq-answer p:last-child {
-    margin-bottom: 0;
-}
-
-
-        footer {
-            background: #121212;
-            padding: 3rem 5%;
+        /* Support Section */
+        .support {
+            padding: 6rem 5%;
+            background: var(--bg-medium);
             text-align: center;
-            margin-top: 4rem;
+        }
+
+        .support h2 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+
+        .support-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .support-card {
+            padding: 2rem 3rem;
+            border-radius: 16px;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            font-weight: 500;
+        }
+
+        .support-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s;
+        }
+
+        .support-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .support-card:hover {
+            text-decoration: none;
+        }
+
+        .support-card i {
+            font-size: 1.8rem;
+        }
+
+        .support-card.discord {
+            background: linear-gradient(135deg, #5865F2, #4752C4);
+        }
+
+        .support-card.vk {
+            background: linear-gradient(135deg, #0077FF, #0066DD);
+        }
+
+        .support-card.telegram {
+            background: linear-gradient(135deg, #0088CC, #0077B5);
+        }
+
+        .support-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            padding: 4rem 5% 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.8;
         }
 
         .social-links {
-            margin-top: 2rem;
+            margin: 2rem 0;
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .social-links a {
-            color: #ffffff;
-            font-size: 1.5rem;
-            transition: color 0.3s;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            text-decoration: none;
         }
 
         .social-links a:hover {
-            color: #00ff88;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-primary);
+            border-color: transparent;
+            transform: translateY(-3px);
+            text-decoration: none;
         }
 
+        /* Mobile Menu Button */
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-medium);
+                flex-direction: column;
+                padding: 2rem;
+                border-top: 1px solid var(--border-color);
             }
-            
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero {
+                padding: 8rem 5% 4rem;
+                min-height: 70vh;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+                letter-spacing: -1px;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .download-btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .support-card {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .download h2, .faq h2, .support h2 {
+                font-size: 2rem;
+            }
+
+            .theme-switcher {
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 0.95rem;
+            }
+
             .hero h1 {
                 font-size: 2rem;
             }
+
+            .download-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .platform-btn {
+                padding: 1.5rem;
+            }
+
+            .faq-question {
+                padding: 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero > *, .feature-card, .faq-item, .platform-btn {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .hero > *:nth-child(1) { animation-delay: 0.1s; }
+        .hero > *:nth-child(2) { animation-delay: 0.2s; }
+        .hero > *:nth-child(3) { animation-delay: 0.3s; }
+        .hero > *:nth-child(4) { animation-delay: 0.4s; }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
         }
     </style>
+    ```html
 </head>
 <body>
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <button class="theme-toggle" onclick="toggleThemeMenu()">
+            <i class="fas fa-palette"></i>
+            <span>Тема</span>
+        </button>
+        <div class="theme-menu" id="themeMenu">
+            <div class="theme-section">
+                <h4>Яркие</h4>
+                <div class="theme-options">
+                    <div class="theme-option" data-theme="vibrant-pink" onclick="setTheme('vibrant-pink')"></div>
+                    <div class="theme-option" data-theme="vibrant-orange" onclick="setTheme('vibrant-orange')"></div>
+                    <div class="theme-option" data-theme="vibrant-yellow" onclick="setTheme('vibrant-yellow')"></div>
+                    <div class="theme-option" data-theme="vibrant-mint" onclick="setTheme('vibrant-mint')"></div>
+                    <div class="theme-option" data-theme="vibrant-blue" onclick="setTheme('vibrant-blue')"></div>
+                    <div class="theme-option active" data-theme="vibrant-purple" onclick="setTheme('vibrant-purple')"></div>
+                </div>
+            </div>
+            <div class="theme-section">
+                <h4>Пастельные</h4>
+                <div class="theme-options">
+                    <div class="theme-option" data-theme="pastel-pink" onclick="setTheme('pastel-pink')"></div>
+                    <div class="theme-option" data-theme="pastel-orange" onclick="setTheme('pastel-orange')"></div>
+                    <div class="theme-option" data-theme="pastel-yellow" onclick="setTheme('pastel-yellow')"></div>
+                    <div class="theme-option" data-theme="pastel-mint" onclick="setTheme('pastel-mint')"></div>
+                    <div class="theme-option" data-theme="pastel-blue" onclick="setTheme('pastel-blue')"></div>
+                    <div class="theme-option" data-theme="pastel-purple" onclick="setTheme('pastel-purple')"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <nav class="navbar">
         <div class="logo">LegacyMirror</div>
         <div class="nav-links">
@@ -294,381 +958,481 @@
             <a href="#download">Скачать</a>
             <a href="#features">Возможности</a>
             <a href="#faq">FAQ</a>
+            <a href="#support">Поддержка</a>
         </div>
+        <button class="mobile-menu" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
     </nav>
 
     <section class="hero" id="home">
-        <h1>Legacy Launcher</h1>
-        <p>Стабильный, быстрый и простой</p>
-        <a href="#download" class="download-btn">Скачать сейчас</a>
+        <div class="hero-badge">✨ Версия 167.1 доступна</div>
+        <h1>Legacy <span class="hero-gradient">Launcher</span></h1>
+        <p>Самый быстрый способ начать играть в Minecraft</p>
+        <a href="#download" class="download-btn">
+            <i class="fas fa-download"></i>
+            Скачать сейчас
+        </a>
     </section>
-<section class="download" id="download">
-    <h2>Варианты установки</h2>
-    <div class="download-grid">
-        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_Installer_legacy.exe" class="platform-btn" data-os="windows">
-            <i class="fab fa-windows"></i>
-            <span>Windows (.exe)</span>
-        </a>
-        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/TL_legacy.dmg" class="platform-btn" data-os="macos">
-            <i class="fab fa-apple"></i>
-            <span>macOS (.dmg)</span>
-        </a>
-        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/TL_legacy.deb" class="platform-btn" data-os="linux">
-            <i class="fab fa-linux"></i>
-            <span>Linux (.deb)</span>
-        </a>
-        <a href="https://docs.llaun.ch/faq/chromeos" class="platform-btn" data-os="chromeos">
-            <i class="fab fa-chrome"></i>
-            <span>ChromeOS</span>
-        </a>
-        <a href="https://flathub.org/apps/ch.tlaun.TL" class="platform-btn" data-os="linux">
-            <i class="fas fa-cube"></i>
-            <span>Flathub</span>
-        </a>
-        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_legacy.jar" class="platform-btn" data-os="windows" data-os="linux">
-            <i class="fab fa-java"></i>
-            <span>Универсальный .jar</span>
-        </a>
 
-        <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_Portable_legacy.zip" class="platform-btn" data-os="windows">
-            <i class="fas fa-file-archive"></i>
-            <span>Портативная версия</span>
-        </a>
-        <!-- Добавить в секцию .download-grid перед портативной версией -->
-<a href="https://adoptium.net/temurin/releases/" class="platform-btn" data-os="windows" data-os="macos" data-os="linux" target="_blank">
-    <i class="fas fa-coffee"></i>
-    <span>Java от Adoptium</span>
-</a>
-    </div>
-    <p class="download-note">Версия лаунчера: 159.10 | Стабильная версия</p>
-</section>
+    <section class="download" id="download">
+        <h2>Выберите платформу</h2>
+        <div class="download-grid">
+            <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_Installer_legacy.exe" class="platform-btn" data-os="windows">
+                <i class="fab fa-windows"></i>
+                <span>Windows (.exe)</span>
+            </a>
+            <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/TL_legacy.dmg" class="platform-btn" data-os="macos">
+                <i class="fab fa-apple"></i>
+                <span>macOS (.dmg)</span>
+            </a>
+            <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/TL_legacy.deb" class="platform-btn" data-os="linux">
+                <i class="fab fa-linux"></i>
+                <span>Linux (.deb)</span>
+            </a>
+            <a href="https://docs.llaun.ch/faq/chromeos" class="platform-btn" data-os="chromeos">
+                <i class="fab fa-chrome"></i>
+                <span>ChromeOS</span>
+            </a>
+            <a href="https://flathub.org/apps/ch.tlaun.TL" class="platform-btn" data-os="linux">
+                <i class="fas fa-cube"></i>
+                <span>Flathub</span>
+            </a>
+            <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_legacy.jar" class="platform-btn">
+                <i class="fab fa-java"></i>
+                <span>Универсальный .jar</span>
+            </a>
+            <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_Portable_legacy.zip" class="platform-btn" data-os="windows">
+                <i class="fas fa-file-archive"></i>
+                <span>Портативная версия</span>
+            </a>
+            <a href="https://adoptium.net/temurin/releases/" class="platform-btn" target="_blank">
+                <i class="fas fa-coffee"></i>
+                <span>Java от Adoptium</span>
+            </a>
+        </div>
+        <p class="download-note">Стабильная версия</p>
+    </section>
 
-<style>
-    .download {
-        padding: 4rem 5%;
-        text-align: center;
-        background: #1f1f1f;
-    }
-
-    .download h2 {
-        font-size: 2rem;
-        margin-bottom: 2rem;
-    }
-
-    .download-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .platform-btn {
-        background: #2d2d2d;
-        padding: 1.5rem;
-        border-radius: 12px;
-        text-decoration: none;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        transition: transform 0.3s, background 0.3s;
-        position: relative;
-        overflow: visible !important;
-        padding-right: 2rem; /* Добавляем место для плашки */
-    }
-
-    .platform-btn:hover {
-        background: #00ff8844;
-        transform: translateY(-3px);
-    }
-
-    .platform-btn i {
-        font-size: 1.8rem;
-        width: 40px;
-        color: #00ff88;
-    }
-
-    .platform-btn span {
-        text-align: left;
-        flex-grow: 1;
-        font-weight: 500;
-    }
-
-    .download-note {
-        margin-top: 2rem;
-        color: #888;
-        font-size: 0.9rem;
-    }
-
-    @media (max-width: 480px) {
-        .download-grid {
-            grid-template-columns: 1fr;
-        }
-        
-        .platform-btn {
-            padding: 1rem;
-        }
-    }
-</style>
     <section class="features" id="features">
         <div class="feature-card">
-            <i class="fas fa-feather-alt feature-icon"></i>
-            <h3>Легкий и быстрый</h3>
-            <p>Оптимизированный лаунчер с минимальным потреблением ресурсов</p>
+            <i class="fas fa-leaf feature-icon"></i>
+            <h3>Лёгкость и быстрота</h3>
+            <p>Оптимизированный код и минимальное потребление ресурсов вашего компьютера</p>
         </div>
         <div class="feature-card">
-            <i class="fas fa-dashboard feature-icon"></i>
-            <h3>Стабильный</h3>
-            <p>Работа без сбоев и зависаний</p>
+            <i class="fas fa-heartbeat feature-icon"></i>
+            <h3>Стабильность</h3>
+            <p>Плавный запуск и работа игры без вылетов и зависаний</p>
         </div>
         <div class="feature-card">
-            <i class="fas fa-paint-brush feature-icon"></i>
-            <h3>Кастомизируемый</h3>
-            <p>Настройте внешний вид лаунчера под свой вкус</p>
+            <i class="fas fa-palette feature-icon"></i>
+            <h3>Кастомизация</h3>
+            <p>Настройте интерфейс под себя, устанавливайте кастомные темы и делитесь ими</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-paperclip feature-icon"></i>
+            <h3>Система логов</h3>
+            <p>Уникальная система отчётов об ошибках, которые могут помочь вам решить проблемы с игрой</p>
         </div>
     </section>
 
     <section class="faq" id="faq">
-    <h2>Частые вопросы</h2>
-    
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleAnswer(1)">
-            <span>Это бесплатно?</span>
-            <i class="fas fa-chevron-down"></i>
+        <h2>Частые вопросы</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(1)">
+                <span>Это бесплатно?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer" id="answer1">
+                <p>Да, лаунчер полностью бесплатный. В нём нет и никогда не будет платных функций.</p>
+            </div>
         </div>
-        <div class="faq-answer" id="answer1">
-            <p>Да, лаунчер полностью бесплатный. В нём нет и никогда не будет платных функций.</p>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(2)">
+                <span>Есть ли вирусы?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer" id="answer2">
+                <p>Legacy Launcher полностью безопасен. Если вы скачаете лаунчер с этой страницы, мы гарантируем то, что он не будет содержать никаких вирусов.</p>
+                <p>Если вы знакомы с разработкой на Java, являетесь специалистом по кибербезопасности, ну или просто хотите поиграться, для вас доступны исходники лаунчера.</p>
+            </div>
         </div>
-    </div>
 
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleAnswer(2)">
-            <span>Есть ли вирусы?</span>
-            <i class="fas fa-chevron-down"></i>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(3)">
+                <span>Можно ли устанавливать читы?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer" id="answer3">
+                <p>Да, лаунчер позволяет игрокам запускать любые версии игры без ограничений.</p>
+                <p>Мы не рекомендуем пользоваться читами там, где это запрещено.</p>
+            </div>
         </div>
-        <div class="faq-answer" id="answer2">
-            <p>Legacy Launcher полностью безопасен. Если вы скачаете лаунчер с этой страницы, мы гарантируем то, что он не будет содержать никаких вирусов.</p>
-            <p>Если вы знакомы с разработкой на Java, являетесь специалистом по кибербезопасности, ну или просто хотите поиграться, для вас доступны исходники лаунчера.</p>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(4)">
+                <span>Можно ли устанавливать моды и сборки?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer" id="answer4">
+                <p>Да, можно! Для вашего удобства в лаунчере можно выбрать версии с Forge и Fabric. Авторы также оставили возможность устанавливать их вручную.</p>
+            </div>
         </div>
-    </div>
 
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleAnswer(3)">
-            <span>Можно ли устанавливать читы?</span>
-            <i class="fas fa-chevron-down"></i>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(5)">
+                <span>Можно ли менять скины в Legacy Launcher?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer" id="answer5">
+                <p>Да, конечно! Для этого вам и вашим друзьям следует использовать бесплатный аккаунт Ely.by. Его можно добавить в лаунчере в меню аккаунтов.</p>
+            </div>
         </div>
-        <div class="faq-answer" id="answer3">
-            <p>Да, лаунчер позволяет игрокам запускать любые версии игры без ограничений.</p>
-            <p>Мы не рекомендуем пользоваться читами там, где это запрещено.</p>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(6)">
+                <span>Есть ли у Legacy Launcher портативная сборка?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer" id="answer6">
+                <p>Да, есть. Можете скачать портативную сборку в разделе загрузок. Инструкции найдете внутри архива.</p>
+            </div>
         </div>
-    </div>
 
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleAnswer(4)">
-            <span>Можно ли устанавливать моды и сборки?</span>
-            <i class="fas fa-chevron-down"></i>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(7)">
+                <span>У меня не получается запустить игру. Что делать?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer" id="answer7">
+                <p>Обратитесь в бесплатную поддержку по ссылкам ниже.</p>
+            </div>
         </div>
-        <div class="faq-answer" id="answer4">
-            <p>Да, можно! Для вашего удобства в лаунчере можно выбрать версии с Forge и Fabric. Авторы также оставили возможность устанавливать их вручную.</p>
+    </section>
+
+    <section class="support" id="support">
+        <h2>Поддержка</h2>
+        <div class="support-grid">
+            <a href="https://discord.gg/tl-russkoiazychnyi-filial-177087343511994368" class="support-card discord">
+                <i class="fab fa-discord"></i>
+                <span>Discord сервер</span>
+            </a>
+            <a href="https://vk.com/legacylauncher" class="support-card vk">
+                <i class="fab fa-vk"></i>
+                <span>Сообщество VK</span>
+            </a>
+            <a href="https://t.me/tl_chat_ru/687311" class="support-card telegram">
+                <i class="fab fa-telegram"></i>
+                <span>Telegram чат</span>
+            </a>
         </div>
-    </div>
+    </section>
 
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleAnswer(5)">
-            <span>Можно ли менять скины в Legacy Launcher?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer" id="answer5">
-            <p>Да, конечно! Для этого вам и вашим друзьям следует использовать бесплатный аккаунт Ely.by. Его можно добавить в лаунчере в меню аккаунтов.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleAnswer(6)">
-            <span>Есть ли у Legacy Launcher портативная сборка?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer" id="answer6">
-            <p>Да, есть. Можете скачать портативную сборку здесь. Инструкции найдете внутри архива.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleAnswer(7)">
-            <span>У меня не получается запустить игру. Что делать?</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer" id="answer7">
-            <p>Обратитесь в бесплатную поддержку по ссылкам ниже.</p>
-        </div>
-    </div>
-</section>
-<!-- Поддержка после секции FAQ и перед футером -->
-<section class="support" id="support">
-    <h2>Поддержка</h2>
-    <div class="support-grid">
-        <a href="https://discord.gg/tl-russkoiazychnyi-filial-177087343511994368" class="support-card discord">
-            <i class="fab fa-discord"></i>
-            <span>Discord сервер</span>
-        </a>
-        <a href="https://vk.com/legacylauncher" class="support-card vk">
-            <i class="fab fa-vk"></i>
-            <span>Сообщество VK</span>
-        </a>
-        <a href="https://t.me/tl_chat_ru/687311" class="support-card telegram">
-    <i class="fab fa-telegram"></i>
-    <span>Telegram чат</span>
-</a>
-    </div>
-</section>
-
-<style>
-    .support {
-        padding: 4rem 5%;
-        text-align: center;
-        background: #1f1f1f;
-    }
-
-    .support h2 {
-        font-size: 2rem;
-        margin-bottom: 2rem;
-    }
-
-    .support-grid {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        flex-wrap: wrap;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .support-card {
-        padding: 2rem 3rem;
-        border-radius: 15px;
-        text-decoration: none;
-        color: white;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        transition: transform 0.3s;
-    }
-
-    .support-card i {
-        font-size: 2rem;
-    }
-
-    .support-card.discord {
-        background: #5865F2;
-    }
-
-    .support-card.vk {
-        background: #0077FF;
-    }
-    
-    .support-card.telegram {
-    background: #0088CC;
-    }
-
-    .support-card:hover {
-        transform: translateY(-5px);
-    }
-
-    @media (max-width: 480px) {
-        .support-card {
-            width: 100%;
-            justify-content: center;
-        }
-    }
-
-</style>
     <footer>
         <p>LegacyMirror не аффилирован с Mojang или Microsoft. Все права принадлежат их законным владельцам.</p>
         <div class="social-links">
-            <a href="https://discord.gg/tl-russkoiazychnyi-filial-177087343511994368"><i class="fab fa-discord"></i></a>
-            <a href="https://github.com/bUmmy1337/legacylauncher/tree/main"><i class="fab fa-github"></i></a>
-            <a href="https://t.me/tl_chat_ru/"><i class="fab fa-telegram"></i></a>
+            <a href="https://discord.gg/tl-russkoiazychnyi-filial-177087343511994368" aria-label="Discord">
+                <i class="fab fa-discord"></i>
+            </a>
+            <a href="https://github.com/bUmmy1337/legacylauncher/tree/main" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://t.me/tl_chat_ru/" aria-label="Telegram">
+                <i class="fab fa-telegram"></i>
+            </a>
         </div>
-        <p style="margin-top: 2rem;">© 2025 LegacyMirror. Все права на лаунчер принадлежат Legacy Launcher.</p>
+        <p style="margin-top: 2rem; color: var(--text-secondary);">© 2025 LegacyMirror. Все права на лаунчер принадлежат Legacy Launcher.</p>
     </footer>
-<script>
-function toggleAnswer(id) {
-    const answer = document.getElementById(`answer${id}`);
-    const icon = answer.previousElementSibling.querySelector('i');
-    answer.classList.toggle('active');
-    icon.classList.toggle('fa-chevron-up');
-}
-</script>
+
     <script>
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center' // Прокрутка до центра элемента
-                });
+        // Theme Management
+        function setTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('selectedTheme', themeName);
+            
+            // Update active state
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            document.querySelector(`[data-theme="${themeName}"]`).classList.add('active');
+        }
+
+        function toggleThemeMenu() {
+            const menu = document.getElementById('themeMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Close theme menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const themeSwitcher = document.querySelector('.theme-switcher');
+            if (!themeSwitcher.contains(e.target)) {
+                document.getElementById('themeMenu').classList.remove('active');
             }
         });
-    });
-</script>
-<script>
 
-    function detectOS() {
-        const userAgent = navigator.userAgent;
-        if (userAgent.includes('Windows')) return 'windows';
-        if (userAgent.includes('Mac OS')) return 'macos';
-        if (userAgent.includes('Linux')) return 'linux';
-        if (userAgent.includes('CrOS')) return 'chromeos';
-        return 'unknown';
-    }
+        // Load saved theme
+        const savedTheme = localStorage.getItem('selectedTheme') || 'vibrant-purple';
+        setTheme(savedTheme);
 
-
-    function markPlatform() {
-    const os = detectOS();
-    const platformButtons = document.querySelectorAll('.platform-btn');
-    
-    platformButtons.forEach(btn => {
-        const supportedOS = btn.getAttribute('data-os') || '';
-        if (supportedOS.includes(os)) {
-            const label = document.createElement('div'); // Меняем span на div
-            label.className = 'your-platform';
-            label.textContent = 'Для вас';
-            btn.prepend(label); // Вставляем в начало кнопки
+        // FAQ Toggle
+        function toggleAnswer(id) {
+            const answer = document.getElementById(`answer${id}`);
+            const icon = answer.previousElementSibling.querySelector('i');
+            const isActive = answer.classList.contains('active');
+            
+            // Close all other answers
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelectorAll('.faq-question i').forEach(item => {
+                item.style.transform = 'rotate(0deg)';
+            });
+            
+            // Toggle current answer
+            if (!isActive) {
+                answer.classList.add('active');
+                icon.style.transform = 'rotate(180deg)';
+            }
         }
-    });
-}
 
-
-    window.addEventListener('DOMContentLoaded', markPlatform);
-</script> 
-<script>
-    function isMobile() {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    }
-
-    function handleMobile() {
-        // Добавить сообщение в секцию загрузок
-        const downloadSection = document.getElementById('download');
-        if(downloadSection && !document.getElementById('unsupported-msg')) {
-            const msg = document.createElement('div');
-            msg.id = 'unsupported-msg';
-            msg.className = 'unsupported-message';
-            msg.innerHTML = `
-                <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                <h3>Ваше устройство не поддерживается</h3>
-                <p>Legacy Launcher и другие лаунчеры для «Minecraft: Java Edition» работают только на компьютерах под управлением Windows, Linux или macOS.</p>
-            `;
-            downloadSection.prepend(msg);
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
         }
-    }
 
-    // Автоматическая проверка при загрузке
-    if(isMobile()) {
-        handleMobile();
-    }
-</script>
+                // Platform Detection
+        function detectPlatform() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            const platform = navigator.platform.toLowerCase();
+            
+            let detectedOS = '';
+            
+            if (userAgent.includes('win') || platform.includes('win')) {
+                detectedOS = 'windows';
+            } else if (userAgent.includes('mac') || platform.includes('mac')) {
+                detectedOS = 'macos';
+            } else if (userAgent.includes('linux') || platform.includes('linux')) {
+                detectedOS = 'linux';
+            } else if (userAgent.includes('cros')) {
+                detectedOS = 'chromeos';
+            }
+            
+            // Add "Your Platform" badge to detected platform
+            if (detectedOS) {
+                const platformBtns = document.querySelectorAll(`[data-os="${detectedOS}"]`);
+                if (platformBtns.length > 0 && !platformBtns[0].querySelector('.your-platform')) {
+                    const badge = document.createElement('div');
+                    badge.className = 'your-platform';
+                    badge.textContent = 'Ваша ОС';
+                    platformBtns[0].style.position = 'relative';
+                    platformBtns[0].appendChild(badge);
+                }
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Close mobile menu if open
+                    const navLinks = document.querySelector('.nav-links');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(17, 17, 17, 0.95)';
+                navbar.style.backdropFilter = 'blur(25px)';
+            } else {
+                navbar.style.background = 'rgba(17, 17, 17, 0.8)';
+                navbar.style.backdropFilter = 'blur(20px)';
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const navbar = document.querySelector('.navbar');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (!navbar.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize platform detection
+            detectPlatform();
+            
+            // Set up intersection observer for scroll animations
+            const animatedElements = document.querySelectorAll('.feature-card, .faq-item, .platform-btn');
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Add staggered animation delays
+            const heroElements = document.querySelectorAll('.hero > *');
+            heroElements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.15}s`;
+            });
+            
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+            
+            // Preload critical images and fonts
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'font';
+            link.type = 'font/woff2';
+            link.crossOrigin = 'anonymous';
+            document.head.appendChild(link);
+        });
+
+        // Add keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            // Close theme menu with Escape key
+            if (e.key === 'Escape') {
+                const themeMenu = document.getElementById('themeMenu');
+                const navLinks = document.querySelector('.nav-links');
+                
+                if (themeMenu.classList.contains('active')) {
+                    themeMenu.classList.remove('active');
+                }
+                
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
+            }
+        });
+
+        // Performance optimization: Throttle scroll events
+        let ticking = false;
+        
+        function updateNavbar() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(17, 17, 17, 0.95)';
+                navbar.style.backdropFilter = 'blur(25px)';
+            } else {
+                navbar.style.background = 'rgba(17, 17, 17, 0.8)';
+                navbar.style.backdropFilter = 'blur(20px)';
+            }
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(updateNavbar);
+                ticking = true;
+            }
+        });
+
+        // Add loading state management
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+            
+            // Trigger animations after page load
+            setTimeout(() => {
+                const heroElements = document.querySelectorAll('.hero > *');
+                heroElements.forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+            }, 100);
+        });
+
+        // Error handling for external links
+        document.querySelectorAll('a[href^="http"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Add analytics or error tracking here if needed
+                console.log('External link clicked:', this.href);
+            });
+        });
+
+        // Add touch support for mobile devices
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartY - touchEndY;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                // Close mobile menu on swipe
+                const navLinks = document.querySelector('.nav-links');
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
+            }
+        }
+
+        // Add focus management for accessibility
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.setAttribute('tabindex', '0');
+            question.setAttribute('role', 'button');
+            question.setAttribute('aria-expanded', 'false');
+            
+            question.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+
+        // Update aria-expanded when FAQ items are toggled
+        const originalToggleAnswer = window.toggleAnswer;
+        window.toggleAnswer = function(id) {
+            const question = document.querySelector(`#answer${id}`).previousElementSibling;
+            const isActive = document.getElementById(`answer${id}`).classList.contains('active');
+            
+            originalToggleAnswer(id);
+            
+            // Update aria-expanded
+            question.setAttribute('aria-expanded', !isActive ? 'true' : 'false');
+        };
+    </script>
 </body>
 </html>

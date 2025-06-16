@@ -171,6 +171,88 @@
             }
         }
 
+        /* Language Switcher */
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .language-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem 0.8rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            min-width: 70px;
+            justify-content: center;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .language-toggle:hover {
+            background: var(--bg-light);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .language-toggle.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .flag-icon {
+            width: 18px;
+            height: 12px;
+            border-radius: 2px;
+            display: inline-block;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .flag-ru {
+            background: linear-gradient(to bottom, #ffffff 33%, #0039a6 33%, #0039a6 66%, #d52b1e 66%);
+        }
+
+        .flag-en {
+    width: 18px;
+    height: 12px;
+    border-radius: 2px;
+    display: inline-block;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    background: linear-gradient(to bottom, 
+        #b22234 0%, #b22234 7.7%, 
+        #ffffff 7.7%, #ffffff 15.4%, 
+        #b22234 15.4%, #b22234 23.1%, 
+        #ffffff 23.1%, #ffffff 30.8%, 
+        #b22234 30.8%, #b22234 38.5%, 
+        #ffffff 38.5%, #ffffff 46.2%, 
+        #b22234 46.2%, #b22234 53.9%, 
+        #ffffff 53.9%, #ffffff 61.6%, 
+        #b22234 61.6%, #b22234 69.3%, 
+        #ffffff 69.3%, #ffffff 77%, 
+        #b22234 77%, #b22234 84.7%, 
+        #ffffff 84.7%, #ffffff 92.4%, 
+        #b22234 92.4%, #b22234 100%);
+    position: relative;
+}
+.flag-en::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 54%;
+    background: #3c3b6e;
+    border-radius: 2px 0 0 0;
+}
+
         /* Theme Switcher */
         .theme-switcher {
             position: fixed;
@@ -296,6 +378,18 @@
             border-bottom: 1px solid var(--border-color);
         }
 
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         .logo {
             font-family: 'Unbounded', sans-serif;
             font-size: 1.4rem;
@@ -390,7 +484,8 @@
             color: var(--text-secondary);
             margin-bottom: 3rem;
             font-weight: 400;
-                   }
+            max-width: 600px;
+        }
 
         .download-btn {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -788,8 +883,22 @@
             cursor: pointer;
         }
 
+        /* Language transition animation */
+        .fade-content {
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .fade-content.fade-out {
+            opacity: 0;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
+            .navbar-left {
+                gap: 1rem;
+            }
+
             .nav-links {
                 display: none;
                 position: absolute;
@@ -808,6 +917,16 @@
 
             .mobile-menu {
                 display: block;
+            }
+
+            .language-switcher {
+                gap: 0.3rem;
+            }
+
+            .language-toggle {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.8rem;
+                min-width: 60px;
             }
 
             .hero {
@@ -870,6 +989,15 @@
                 padding: 1.5rem;
                 font-size: 1rem;
             }
+
+            .navbar {
+                padding: 1rem 5%;
+            }
+
+            .language-toggle {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.75rem;
+            }
         }
 
         /* Animations */
@@ -916,18 +1044,17 @@
             background: var(--primary-color);
         }
     </style>
-    ```html
 </head>
 <body>
     <!-- Theme Switcher -->
     <div class="theme-switcher">
         <button class="theme-toggle" onclick="toggleThemeMenu()">
             <i class="fas fa-palette"></i>
-            <span>Тема</span>
+            <span data-translate="theme">Тема</span>
         </button>
         <div class="theme-menu" id="themeMenu">
             <div class="theme-section">
-                <h4>Яркие</h4>
+                <h4 data-translate="vibrant">Яркие</h4>
                 <div class="theme-options">
                     <div class="theme-option" data-theme="vibrant-pink" onclick="setTheme('vibrant-pink')"></div>
                     <div class="theme-option" data-theme="vibrant-orange" onclick="setTheme('vibrant-orange')"></div>
@@ -938,7 +1065,7 @@
                 </div>
             </div>
             <div class="theme-section">
-                <h4>Пастельные</h4>
+                <h4 data-translate="pastel">Пастельные</h4>
                 <div class="theme-options">
                     <div class="theme-option" data-theme="pastel-pink" onclick="setTheme('pastel-pink')"></div>
                     <div class="theme-option" data-theme="pastel-orange" onclick="setTheme('pastel-orange')"></div>
@@ -952,31 +1079,47 @@
     </div>
 
     <nav class="navbar">
-        <div class="logo">LegacyMirror</div>
-        <div class="nav-links">
-            <a href="#home">Главная</a>
-            <a href="#download">Скачать</a>
-            <a href="#features">Возможности</a>
-            <a href="#faq">FAQ</a>
-            <a href="#support">Поддержка</a>
+        <div class="navbar-left">
+            <div class="logo">LegacyMirror</div>
+            <div class="nav-links">
+                <a href="#home" data-translate="home">Главная</a>
+                <a href="#download" data-translate="download">Скачать</a>
+                <a href="#features" data-translate="features">Возможности</a>
+                <a href="#faq">FAQ</a>
+                <a href="#support" data-translate="support">Поддержка</a>
+            </div>
         </div>
-        <button class="mobile-menu" onclick="toggleMobileMenu()">
-            <i class="fas fa-bars"></i>
-        </button>
+        <div class="navbar-right">
+            <div class="language-switcher">
+                <button class="language-toggle" data-lang="ru" onclick="setLanguage('ru')">
+                    <span class="flag-icon flag-ru"></span>
+                    <span>RU</span>
+                </button>
+                <button class="language-toggle" data-lang="en" onclick="setLanguage('en')">
+                    <span class="flag-icon flag-en"></span>
+                    <span>EN</span>
+                </button>
+            </div>
+            <button class="mobile-menu" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
     </nav>
 
-    <section class="hero" id="home">
-        <div class="hero-badge">✨ Версия 167.1 доступна</div>
+    <section class="hero fade-content" id="home">
+        <div class="hero-badge">
+            <span data-translate="version">✨ Версия 167.1 доступна</span>
+        </div>
         <h1>Legacy <span class="hero-gradient">Launcher</span></h1>
-        <p>Самый быстрый способ начать играть в Minecraft</p>
+        <p data-translate="hero-description">Самый быстрый способ начать играть в Minecraft</p>
         <a href="#download" class="download-btn">
             <i class="fas fa-download"></i>
-            Скачать сейчас
+            <span data-translate="download-now">Скачать сейчас</span>
         </a>
     </section>
 
-    <section class="download" id="download">
-        <h2>Выберите платформу</h2>
+    <section class="download fade-content" id="download">
+        <h2 data-translate="choose-platform">Выберите платформу</h2>
         <div class="download-grid">
             <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_Installer_legacy.exe" class="platform-btn" data-os="windows">
                 <i class="fab fa-windows"></i>
@@ -1000,139 +1143,139 @@
             </a>
             <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_legacy.jar" class="platform-btn">
                 <i class="fab fa-java"></i>
-                <span>Универсальный .jar</span>
+                <span data-translate="universal-jar">Универсальный .jar</span>
             </a>
             <a href="https://github.com/bUmmy1337/legacylauncher/releases/download/launcher/LegacyLauncher_Portable_legacy.zip" class="platform-btn" data-os="windows">
                 <i class="fas fa-file-archive"></i>
-                <span>Портативная версия</span>
+                <span data-translate="portable-version">Портативная версия</span>
             </a>
             <a href="https://adoptium.net/temurin/releases/" class="platform-btn" target="_blank">
                 <i class="fas fa-coffee"></i>
-                <span>Java от Adoptium</span>
+                <span data-translate="java-adoptium">Java от Adoptium</span>
             </a>
         </div>
-        <p class="download-note">Стабильная версия</p>
+        <p class="download-note" data-translate="stable-version">Стабильная версия</p>
     </section>
 
-    <section class="features" id="features">
+    <section class="features fade-content" id="features">
         <div class="feature-card">
             <i class="fas fa-leaf feature-icon"></i>
-            <h3>Лёгкость и быстрота</h3>
-            <p>Оптимизированный код и минимальное потребление ресурсов вашего компьютера</p>
+            <h3 data-translate="lightweight-title">Лёгкость и быстрота</h3>
+            <p data-translate="lightweight-desc">Оптимизированный код и минимальное потребление ресурсов вашего компьютера</p>
         </div>
         <div class="feature-card">
             <i class="fas fa-heartbeat feature-icon"></i>
-            <h3>Стабильность</h3>
-            <p>Плавный запуск и работа игры без вылетов и зависаний</p>
+            <h3 data-translate="stability-title">Стабильность</h3>
+            <p data-translate="stability-desc">Плавный запуск и работа игры без вылетов и зависаний</p>
         </div>
         <div class="feature-card">
             <i class="fas fa-palette feature-icon"></i>
-            <h3>Кастомизация</h3>
-            <p>Настройте интерфейс под себя, устанавливайте кастомные темы и делитесь ими</p>
+            <h3 data-translate="customization-title">Кастомизация</h3>
+            <p data-translate="customization-desc">Настройте интерфейс под себя, устанавливайте кастомные темы и делитесь ими</p>
         </div>
         <div class="feature-card">
             <i class="fas fa-paperclip feature-icon"></i>
-            <h3>Система логов</h3>
-            <p>Уникальная система отчётов об ошибках, которые могут помочь вам решить проблемы с игрой</p>
+            <h3 data-translate="logging-title">Система логов</h3>
+            <p data-translate="logging-desc">Уникальная система отчётов об ошибках, которые могут помочь вам решить проблемы с игрой</p>
         </div>
     </section>
 
-    <section class="faq" id="faq">
-        <h2>Частые вопросы</h2>
+    <section class="faq fade-content" id="faq">
+        <h2 data-translate="faq-title">Частые вопросы</h2>
         
         <div class="faq-item">
             <div class="faq-question" onclick="toggleAnswer(1)">
-                <span>Это бесплатно?</span>
+                <span data-translate="faq-free-question">Это бесплатно?</span>
                 <i class="fas fa-chevron-down"></i>
             </div>
             <div class="faq-answer" id="answer1">
-                <p>Да, лаунчер полностью бесплатный. В нём нет и никогда не будет платных функций.</p>
+                <p data-translate="faq-free-answer">Да, лаунчер полностью бесплатный. В нём нет и никогда не будет платных функций.</p>
             </div>
         </div>
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleAnswer(2)">
-                <span>Есть ли вирусы?</span>
+                <span data-translate="faq-virus-question">Есть ли вирусы?</span>
                 <i class="fas fa-chevron-down"></i>
             </div>
             <div class="faq-answer" id="answer2">
-                <p>Legacy Launcher полностью безопасен. Если вы скачаете лаунчер с этой страницы, мы гарантируем то, что он не будет содержать никаких вирусов.</p>
-                <p>Если вы знакомы с разработкой на Java, являетесь специалистом по кибербезопасности, ну или просто хотите поиграться, для вас доступны исходники лаунчера.</p>
+                <p data-translate="faq-virus-answer1">Legacy Launcher полностью безопасен. Если вы скачаете лаунчер с этой страницы, мы гарантируем то, что он не будет содержать никаких вирусов.</p>
+                <p data-translate="faq-virus-answer2">Если вы знакомы с разработкой на Java, являетесь специалистом по кибербезопасности, ну или просто хотите поиграться, для вас доступны исходники лаунчера.</p>
             </div>
         </div>
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleAnswer(3)">
-                <span>Можно ли устанавливать читы?</span>
+                <span data-translate="faq-cheats-question">Можно ли устанавливать читы?</span>
                 <i class="fas fa-chevron-down"></i>
             </div>
             <div class="faq-answer" id="answer3">
-                <p>Да, лаунчер позволяет игрокам запускать любые версии игры без ограничений.</p>
-                <p>Мы не рекомендуем пользоваться читами там, где это запрещено.</p>
+                <p data-translate="faq-cheats-answer1">Да, лаунчер позволяет игрокам запускать любые версии игры без ограничений.</p>
+                <p data-translate="faq-cheats-answer2">Мы не рекомендуем пользоваться читами там, где это запрещено.</p>
             </div>
         </div>
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleAnswer(4)">
-                <span>Можно ли устанавливать моды и сборки?</span>
+                <span data-translate="faq-mods-question">Можно ли устанавливать моды и сборки?</span>
                 <i class="fas fa-chevron-down"></i>
             </div>
             <div class="faq-answer" id="answer4">
-                <p>Да, можно! Для вашего удобства в лаунчере можно выбрать версии с Forge и Fabric. Авторы также оставили возможность устанавливать их вручную.</p>
+                <p data-translate="faq-mods-answer">Да, можно! Для вашего удобства в лаунчере можно выбрать версии с Forge и Fabric. Авторы также оставили возможность устанавливать их вручную.</p>
             </div>
         </div>
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleAnswer(5)">
-                <span>Можно ли менять скины в Legacy Launcher?</span>
+                <span data-translate="faq-skins-question">Можно ли менять скины в Legacy Launcher?</span>
                 <i class="fas fa-chevron-down"></i>
             </div>
             <div class="faq-answer" id="answer5">
-                <p>Да, конечно! Для этого вам и вашим друзьям следует использовать бесплатный аккаунт Ely.by. Его можно добавить в лаунчере в меню аккаунтов.</p>
+                <p data-translate="faq-skins-answer">Да, конечно! Для этого вам и вашим друзьям следует использовать бесплатный аккаунт Ely.by. Его можно добавить в лаунчере в меню аккаунтов.</p>
             </div>
         </div>
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleAnswer(6)">
-                <span>Есть ли у Legacy Launcher портативная сборка?</span>
+                <span data-translate="faq-portable-question">Есть ли у Legacy Launcher портативная сборка?</span>
                 <i class="fas fa-chevron-down"></i>
             </div>
             <div class="faq-answer" id="answer6">
-                <p>Да, есть. Можете скачать портативную сборку в разделе загрузок. Инструкции найдете внутри архива.</p>
+                <p data-translate="faq-portable-answer">Да, есть. Можете скачать портативную сборку в разделе загрузок. Инструкции найдете внутри архива.</p>
             </div>
         </div>
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleAnswer(7)">
-                <span>У меня не получается запустить игру. Что делать?</span>
+                <span data-translate="faq-help-question">У меня не получается запустить игру. Что делать?</span>
                 <i class="fas fa-chevron-down"></i>
             </div>
             <div class="faq-answer" id="answer7">
-                <p>Обратитесь в бесплатную поддержку по ссылкам ниже.</p>
+                <p data-translate="faq-help-answer">Обратитесь в бесплатную поддержку по ссылкам ниже.</p>
             </div>
         </div>
     </section>
 
-    <section class="support" id="support">
-        <h2>Поддержка</h2>
+    <section class="support fade-content" id="support">
+        <h2 data-translate="support">Поддержка</h2>
         <div class="support-grid">
             <a href="https://discord.gg/tl-russkoiazychnyi-filial-177087343511994368" class="support-card discord">
                 <i class="fab fa-discord"></i>
-                <span>Discord сервер</span>
+                <span data-translate="discord-server">Discord сервер</span>
             </a>
             <a href="https://vk.com/legacylauncher" class="support-card vk">
                 <i class="fab fa-vk"></i>
-                <span>Сообщество VK</span>
+                <span data-translate="vk-community">Сообщество VK</span>
             </a>
             <a href="https://t.me/tl_chat_ru/687311" class="support-card telegram">
                 <i class="fab fa-telegram"></i>
-                <span>Telegram чат</span>
+                <span data-translate="telegram-chat">Telegram чат</span>
             </a>
         </div>
     </section>
 
-    <footer>
-        <p>LegacyMirror не аффилирован с Mojang или Microsoft. Все права принадлежат их законным владельцам.</p>
+    <footer class="fade-content">
+        <p data-translate="disclaimer">LegacyMirror не аффилирован с Mojang или Microsoft. Все права принадлежат их законным владельцам.</p>
         <div class="social-links">
             <a href="https://discord.gg/tl-russkoiazychnyi-filial-177087343511994368" aria-label="Discord">
                 <i class="fab fa-discord"></i>
@@ -1144,10 +1287,214 @@
                 <i class="fab fa-telegram"></i>
             </a>
         </div>
-        <p style="margin-top: 2rem; color: var(--text-secondary);">© 2025 LegacyMirror. Все права на лаунчер принадлежат Legacy Launcher.</p>
+        <p style="margin-top: 2rem; color: var(--text-secondary);" data-translate="copyright">© 2025 LegacyMirror. Все права на лаунчер принадлежат Legacy Launcher.</p>
     </footer>
 
     <script>
+        // Translations object
+        const translations = {
+            ru: {
+                'theme': 'Тема',
+                'vibrant': 'Яркие',
+                'pastel': 'Пастельные',
+                'home': 'Главная',
+                'download': 'Скачать',
+                'features': 'Возможности',
+                'support': 'Поддержка',
+                'version': '✨ Версия 167.1 доступна',
+                'hero-description': 'Самый быстрый способ начать играть в Minecraft',
+                'download-now': 'Скачать сейчас',
+                'choose-platform': 'Выберите платформу',
+                'universal-jar': 'Универсальный .jar',
+                'portable-version': 'Портативная версия',
+                'java-adoptium': 'Java от Adoptium',
+                'stable-version': 'Стабильная версия',
+                'lightweight-title': 'Лёгкость и быстрота',
+                'lightweight-desc': 'Оптимизированный код и минимальное потребление ресурсов вашего компьютера',
+                'stability-title': 'Стабильность',
+                'stability-desc': 'Плавный запуск и работа игры без вылетов и зависаний',
+                'customization-title': 'Кастомизация',
+                'customization-desc': 'Настройте интерфейс под себя, устанавливайте кастомные темы и делитесь ими',
+                'logging-title': 'Система логов',
+                'logging-desc': 'Уникальная система отчётов об ошибках, которые могут помочь вам решить проблемы с игрой',
+                'faq-title': 'Частые вопросы',
+                'faq-free-question': 'Это бесплатно?',
+                'faq-free-answer': 'Да, лаунчер полностью бесплатный. В нём нет и никогда не будет платных функций.',
+                'faq-virus-question': 'Есть ли вирусы?',
+                'faq-virus-answer1': 'Legacy Launcher полностью безопасен. Если вы скачаете лаунчер с этой страницы, мы гарантируем то, что он не будет содержать никаких вирусов.',
+                'faq-virus-answer2': 'Если вы знакомы с разработкой на Java, являетесь специалистом по кибербезопасности, ну или просто хотите поиграться, для вас доступны исходники лаунчера.',
+                'faq-cheats-question': 'Можно ли устанавливать читы?',
+                'faq-cheats-answer1': 'Да, лаунчер позволяет игрокам запускать любые версии игры без ограничений.',
+                'faq-cheats-answer2': 'Мы не рекомендуем пользоваться читами там, где это запрещено.',
+                'faq-mods-question': 'Можно ли устанавливать моды и сборки?',
+                'faq-mods-answer': 'Да, можно! Для вашего удобства в лаунчере можно выбрать версии с Forge и Fabric. Авторы также оставили возможность устанавливать их вручную.',
+                'faq-skins-question': 'Можно ли менять скины в Legacy Launcher?',
+                'faq-skins-answer': 'Да, конечно! Для этого вам и вашим друзьям следует использовать бесплатный аккаунт Ely.by. Его можно добавить в лаунчере в меню аккаунтов.',
+                'faq-portable-question': 'Есть ли у Legacy Launcher портативная сборка?',
+                'faq-portable-answer': 'Да, есть. Можете скачать портативную сборку в разделе загрузок. Инструкции найдете внутри архива.',
+                'faq-help-question': 'У меня не получается запустить игру. Что делать?',
+                'faq-help-answer': 'Обратитесь в бесплатную поддержку по ссылкам ниже.',
+                'discord-server': 'Discord сервер',
+                'vk-community': 'Сообщество VK',
+                'telegram-chat': 'Telegram чат',
+                'disclaimer': 'LegacyMirror не аффилирован с Mojang или Microsoft. Все права принадлежат их законным владельцам.',
+                'copyright': '© 2025 LegacyMirror. Все права на лаунчер принадлежат Legacy Launcher.',
+                'your-platform': 'Ваша ОС'
+            },
+            en: {
+                'theme': 'Theme',
+                'vibrant': 'Vibrant',
+                'pastel': 'Pastel',
+                'home': 'Home',
+                'download': 'Download',
+                'features': 'Features',
+                'support': 'Support',
+                'version': '✨ Version 167.1 available',
+                'hero-description': 'The fastest way to start playing Minecraft',
+                'download-now': 'Download Now',
+                'choose-platform': 'Choose Platform',
+                'universal-jar': 'Universal .jar',
+                'portable-version': 'Portable Version',
+                'java-adoptium': 'Java by Adoptium',
+                'stable-version': 'Stable version',
+                'lightweight-title': 'Lightweight & Fast',
+                'lightweight-desc': 'Optimized code and minimal resource consumption on your computer',
+                'stability-title': 'Stability',
+                'stability-desc': 'Smooth game launch and operation without crashes or freezes',
+                'customization-title': 'Customization',
+                'customization-desc': 'Customize the interface to your liking, install custom themes and share them',
+                'logging-title': 'Logging System',
+                'logging-desc': 'Unique error reporting system that can help you solve game problems',
+                'faq-title': 'Frequently Asked Questions',
+                'faq-free-question': 'Is it free?',
+                'faq-free-answer': 'Yes, the launcher is completely free. There are no paid features and never will be.',
+                'faq-virus-question': 'Are there any viruses?',
+                'faq-virus-answer1': 'Legacy Launcher is completely safe. If you download the launcher from this page, we guarantee that it will not contain any viruses.',
+                'faq-virus-answer2': 'If you are familiar with Java development, are a cybersecurity specialist, or just want to play around, the launcher source code is available for you.',
+                'faq-cheats-question': 'Can I install cheats?',
+                'faq-cheats-answer1': 'Yes, the launcher allows players to run any version of the game without restrictions.',
+                'faq-cheats-answer2': 'We do not recommend using cheats where it is prohibited.',
+                'faq-mods-question': 'Can I install mods and modpacks?',
+                'faq-mods-answer': 'Yes, you can! For your convenience, you can select versions with Forge and Fabric in the launcher. The authors also left the possibility to install them manually.',
+                'faq-skins-question': 'Can I change skins in Legacy Launcher?',
+                'faq-skins-answer': 'Yes, of course! For this, you and your friends should use a free Ely.by account. It can be added in the launcher in the accounts menu.',
+                'faq-portable-question': 'Does Legacy Launcher have a portable build?',
+                'faq-portable-answer': 'Yes, there is. You can download the portable build in the downloads section. Instructions can be found inside the archive.',
+                'faq-help-question': "I can't launch the game. What should I do?",
+                'faq-help-answer': 'Contact free support using the links below.',
+                'discord-server': 'Discord Server',
+                'vk-community': 'VK Community',
+                'telegram-chat': 'Telegram Chat',
+                'disclaimer': 'LegacyMirror is not affiliated with Mojang or Microsoft. All rights belong to their rightful owners.',
+                'copyright': '© 2025 LegacyMirror. All launcher rights belong to Legacy Launcher.',
+                'your-platform': 'Your OS'
+            }
+        };
+
+        let currentLanguage = 'ru';
+
+        // Language Management
+        function setLanguage(lang) {
+            if (lang === currentLanguage) return;
+            
+            // Add fade out effect
+            document.querySelectorAll('.fade-content').forEach(el => {
+                el.classList.add('fade-out');
+            });
+            
+            setTimeout(() => {
+                currentLanguage = lang;
+                updateLanguage();
+                localStorage.setItem('selectedLanguage', lang);
+                
+                // Update language toggles
+                document.querySelectorAll('.language-toggle').forEach(toggle => {
+                    toggle.classList.remove('active');
+                });
+                document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
+                
+                // Update HTML lang attribute
+                document.documentElement.lang = lang;
+                
+                // Update page title and meta
+                if (lang === 'en') {
+                    document.title = 'Legacy Launcher Mirror - Legendary Minecraft Launcher';
+                    document.querySelector('meta[property="og:title"]').content = 'Legacy Mirror';
+                    document.querySelector('meta[property="og:description"]').content = 'Unofficial mirror of the fastest and safest launcher.';
+                } else {
+                    document.title = 'Legacy Launcher Mirror - Легендарный лаунчер Minecraft';
+                    document.querySelector('meta[property="og:title"]').content = 'Legacy Mirror';
+                    document.querySelector('meta[property="og:description"]').content = 'Неофициальное зеркало самого быстрого и безопасного лаунчера.';
+                }
+                
+                // Remove fade out effect
+                document.querySelectorAll('.fade-content').forEach(el => {
+                    el.classList.remove('fade-out');
+                });
+            }, 150);
+        }
+
+        function updateLanguage() {
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[currentLanguage] && translations[currentLanguage][key]) {
+                    element.textContent = translations[currentLanguage][key];
+                }
+            });
+        }
+
+        // Auto-detect language by geolocation and browser
+        async function detectLanguage() {
+            const savedLanguage = localStorage.getItem('selectedLanguage');
+            if (savedLanguage) {
+                currentLanguage = savedLanguage;
+                setLanguage(savedLanguage);
+                return;
+            }
+            
+            try {
+                // Try to detect by geolocation using IP
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                
+                // Countries where English should be default
+                const englishCountries = [
+                    'US', 'GB', 'CA', 'AU', 'NZ', 'IE', 'ZA', 'IN', 'SG', 
+                    'MY', 'PH', 'NG', 'KE', 'GH', 'UG', 'ZW', 'BW', 'MW'
+                ];
+                
+                if (englishCountries.includes(data.country_code)) {
+                    setLanguage('en');
+                    return;
+                }
+                
+                // Countries where Russian should be default
+                const russianCountries = [
+                    'RU', 'BY', 'KZ', 'KG', 'TJ', 'UZ', 'AM', 'AZ', 'GE', 'MD'
+                ];
+                
+                if (russianCountries.includes(data.country_code)) {
+                    setLanguage('ru');
+                    return;
+                }
+                
+            } catch (error) {
+                console.log('Geolocation detection failed, falling back to browser language');
+            }
+            
+            // Fallback to browser language
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang.startsWith('en')) {
+                setLanguage('en');
+            } else if (browserLang.startsWith('ru')) {
+                setLanguage('ru');
+            } else {
+                // Default fallback based on more common usage
+                setLanguage('en');
+            }
+        }
+
         // Theme Management
         function setTheme(themeName) {
             document.documentElement.setAttribute('data-theme', themeName);
@@ -1204,7 +1551,7 @@
             navLinks.classList.toggle('active');
         }
 
-                // Platform Detection
+        // Platform Detection
         function detectPlatform() {
             const userAgent = navigator.userAgent.toLowerCase();
             const platform = navigator.platform.toLowerCase();
@@ -1227,7 +1574,7 @@
                 if (platformBtns.length > 0 && !platformBtns[0].querySelector('.your-platform')) {
                     const badge = document.createElement('div');
                     badge.className = 'your-platform';
-                    badge.textContent = 'Ваша ОС';
+                    badge.textContent = translations[currentLanguage]['your-platform'] || 'Your OS';
                     platformBtns[0].style.position = 'relative';
                     platformBtns[0].appendChild(badge);
                 }
@@ -1290,8 +1637,11 @@
             });
         }, observerOptions);
 
-        // Observe elements for animation
+        // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize language detection
+            detectLanguage();
+            
             // Initialize platform detection
             detectPlatform();
             
@@ -1311,14 +1661,6 @@
             featureCards.forEach((card, index) => {
                 card.style.animationDelay = `${index * 0.1}s`;
             });
-            
-            // Preload critical images and fonts
-            const link = document.createElement('link');
-            link.rel = 'preload';
-            link.as = 'font';
-            link.type = 'font/woff2';
-            link.crossOrigin = 'anonymous';
-            document.head.appendChild(link);
         });
 
         // Add keyboard navigation support
@@ -1374,40 +1716,6 @@
             }, 100);
         });
 
-        // Error handling for external links
-        document.querySelectorAll('a[href^="http"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Add analytics or error tracking here if needed
-                console.log('External link clicked:', this.href);
-            });
-        });
-
-        // Add touch support for mobile devices
-        let touchStartY = 0;
-        let touchEndY = 0;
-
-        document.addEventListener('touchstart', function(e) {
-            touchStartY = e.changedTouches[0].screenY;
-        });
-
-        document.addEventListener('touchend', function(e) {
-            touchEndY = e.changedTouches[0].screenY;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const diff = touchStartY - touchEndY;
-            
-            if (Math.abs(diff) > swipeThreshold) {
-                // Close mobile menu on swipe
-                const navLinks = document.querySelector('.nav-links');
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                }
-            }
-        }
-
         // Add focus management for accessibility
         document.querySelectorAll('.faq-question').forEach(question => {
             question.setAttribute('tabindex', '0');
@@ -1436,3 +1744,4 @@
     </script>
 </body>
 </html>
+
